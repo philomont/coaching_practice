@@ -1,0 +1,391 @@
+/* ═══════════════════════════════════════════════════════════
+   SOUTHWEST 3 — "YUCCA DUSK" (golden hour into night, dramatic)
+   The whole page is an evening run down the river: last light on
+   the mesa, silhouetted juniper and yucca, deep red rock, then
+   indigo night and a campfire under the stars. The most
+   theatrical of the three variants — greens appear as dark
+   juniper/yucca silhouettes against the amber.
+   Palette: amber sky #f6d9a8 · ochre #e09a68 · terra #c05a42
+            red rock #8f4438 · indigo #3c3550 · night #1c1b2e
+            juniper silhouettes #3f4f3f · river dusk #3d5a6b
+   ═══════════════════════════════════════════════════════════ */
+
+:root {
+  --amber: #f6d9a8;
+  --ochre: #e09a68;
+  --terra: #c05a42;
+  --terra-dark: #a0422f;
+  --redrock: #8f4438;
+  --indigo: #3c3550;
+  --night: #1c1b2e;
+  --juniper: #3f4f3f;
+  --cream: #f8f0df;
+  --ink: #3a2b22;
+  --ink-soft: #7d6350;
+  --river: #3d5a6b;
+  --river-deep: #243b4a;
+  --serif: Georgia, "Times New Roman", serif;
+  --sans: -apple-system, "Segoe UI", Helvetica, Arial, sans-serif;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: var(--sans); color: var(--ink);
+  background: var(--amber); line-height: 1.65;
+}
+h1, h2, h3, blockquote { font-family: var(--serif); font-weight: 400; }
+h1 { font-size: clamp(2.2rem, 5vw, 3.6rem); line-height: 1.15; margin: .4em 0; }
+h1 em { color: var(--terra-dark); font-style: italic; }
+h2 { font-size: clamp(1.8rem, 3.5vw, 2.6rem); }
+a { color: inherit; text-decoration: none; }
+
+/* ── top nav ─────────────────────────────────────── */
+.topnav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 50;
+  display: flex; justify-content: space-between; align-items: center;
+  padding: .8rem 2rem;
+  background: rgba(246,217,168,.85); backdrop-filter: blur(8px);
+  border-bottom: 1px solid rgba(160,66,47,.25);
+  color: var(--ink);
+}
+.wordmark { font-family: var(--serif); font-size: 1.15rem; }
+.wordmark span { color: var(--ink-soft); font-size: .85rem; }
+.topnav nav { display: flex; gap: 1.4rem; align-items: center; font-size: .9rem; }
+.topnav nav a:hover { color: var(--terra-dark); }
+@media (max-width: 900px) { .topnav nav a:not(.cta) { display: none; } }
+
+.btn {
+  display: inline-block; padding: .65rem 1.4rem; border-radius: 999px;
+  font-size: .95rem; transition: transform .2s, box-shadow .2s, background .2s;
+}
+.btn:hover { transform: translateY(-2px); }
+.btn.primary { background: var(--terra-dark); color: #fff; box-shadow: 0 6px 18px rgba(160,66,47,.45); }
+.btn.primary:hover { background: #8a3626; }
+.btn.ghost { border: 1.5px solid var(--ink); }
+.btn.ghost:hover { background: var(--ink); color: var(--cream); }
+.btn.big { padding: .85rem 1.8rem; font-size: 1.05rem; }
+
+/* ── THE RIVER AT DUSK — fixed bottom; canoe + ripples ── */
+.river {
+  position: fixed; left: 0; right: 0; bottom: 0; height: 76px;
+  z-index: 40; pointer-events: none; overflow: hidden;
+}
+.river::before {
+  content: ""; position: absolute; inset: 0;
+  background: linear-gradient(180deg, rgba(61,90,107,.85), var(--river-deep));
+}
+/* the sun's path reflected on the water */
+.sunpath {
+  position: absolute; top: 10px; bottom: 0; left: 30%; width: 90px;
+  background: linear-gradient(180deg, rgba(246,197,120,.5), rgba(246,197,120,.08));
+  filter: blur(6px); transform: skewX(-8deg);
+}
+.ripples { position: absolute; bottom: 0; width: 100%; height: 60px; }
+.ripple { fill: #6b8ba0; }
+.ripple.r1 { opacity: .35; animation: rippleSlide 10s linear infinite; }
+.ripple.r2 { opacity: .22; animation: rippleSlide 16s linear infinite reverse; }
+@keyframes rippleSlide { from { transform: translateX(0) } to { transform: translateX(-240px) } }
+
+/* — the canoe, catching the last light — */
+.canoe {
+  position: absolute; bottom: 8px; left: -130px; width: 116px; height: 54px;
+  filter: drop-shadow(0 3px 3px rgba(5,15,22,.45));
+  transition: left .18s linear;
+}
+.canoe-bob { animation: bob 3.4s ease-in-out infinite; }
+@keyframes bob { 0%,100% { transform: translateY(0) rotate(-.8deg) } 50% { transform: translateY(-3px) rotate(.8deg) } }
+.canoe .paddler { fill: #1d1712; stroke: none; }
+.paddler-arm { fill: none; stroke: #1d1712; stroke-width: 4; stroke-linecap: round; }
+.hull { fill: #4c2e20; stroke: #351e13; stroke-width: 1.5; }
+.hull-interior { fill: rgba(20,11,7,.6); }
+.hull-rim { stroke: #7a4c34; stroke-width: 3; stroke-linecap: round; }
+.hull-light { stroke: rgba(246,197,120,.75); stroke-width: 2; stroke-linecap: round; } /* rim light */
+.paddle-shaft { stroke: #6e452f; stroke-width: 3; stroke-linecap: round; }
+.paddle-blade { fill: #3d281c; }
+.wake { fill: none; stroke: #cfd8df; stroke-width: 2.5; stroke-linecap: round; opacity: .4; }
+.reflection { fill: rgba(246,197,120,.16); } /* warm reflection on dark water */
+
+.mileage {
+  position: absolute; right: 14px; bottom: 12px; z-index: 2;
+  font-family: var(--serif); font-style: italic; font-size: .78rem;
+  color: #e8d5b8; background: rgba(36,59,74,.55);
+  padding: 2px 10px; border-radius: 999px; border: 1px solid rgba(232,213,184,.25);
+}
+main { padding-bottom: 76px; }
+
+/* ── home / hero · golden hour on the mesa ─────────── */
+.hero {
+  position: relative; min-height: 100vh; overflow: hidden;
+  display: flex; flex-direction: column; justify-content: center;
+  padding: 120px 6vw 110px;
+  background: linear-gradient(180deg, var(--amber) 0%, #f0b878 65%, #e59c5e 100%);
+}
+/* the sun, sitting on the horizon */
+.sun {
+  position: absolute; left: 55%; bottom: 18%;
+  width: 130px; height: 130px; border-radius: 50%;
+  background: radial-gradient(circle at 40% 35%, #ffe9b8, #f5c877 70%);
+  box-shadow: 0 0 60px 24px rgba(246,197,120,.55);
+}
+/* backlit canyon walls */
+.strata {
+  position: absolute; bottom: 0; left: 0; width: 100%; height: 46%;
+  fill: rgba(143,68,56,.4);
+}
+.strata.s2 { height: 32%; fill: rgba(92,42,38,.55); }
+
+/* juniper silhouettes */
+.tree { position: absolute; bottom: 10%; pointer-events: none; }
+.juniper { width: 150px; height: 172px; }
+.j-left { left: 3vw; }
+.j-right { right: 4vw; bottom: 6%; }
+.juniper .trunk { stroke: #2a241c; }
+.juniper .foliage { fill: var(--juniper); }
+
+/* yucca silhouettes */
+.plant { position: absolute; pointer-events: none; }
+.yucca { width: 96px; height: 88px; }
+.yucca .blade { fill: #35442f; }
+.y-fore-l { left: 15vw; bottom: 4%; }
+.y-fore-r { right: 14vw; bottom: 5%; }
+
+@media (max-width: 850px) {
+  .j-right, .y-fore-r { display: none; }
+  .juniper { width: 100px; height: 116px; }
+  .yucca { width: 64px; height: 60px; }
+  .sun { left: 70%; width: 90px; height: 90px; }
+}
+
+.hero-inner {
+  position: relative; z-index: 2;
+  display: grid; grid-template-columns: 1.2fr .8fr; gap: 4rem; align-items: center;
+  max-width: 1100px; margin: 0 auto;
+}
+@media (max-width: 850px) { .hero-inner { grid-template-columns: 1fr; } }
+
+.kicker {
+  text-transform: uppercase; letter-spacing: .18em; font-size: .78rem;
+  color: var(--terra-dark); margin-bottom: .5rem;
+}
+.lede { font-size: 1.1rem; color: #6b4f3d; max-width: 34rem; }
+.hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; margin-top: 1.8rem; }
+
+.hero-photo { justify-self: center; position: relative; }
+.photo-placeholder {
+  width: 300px; height: 380px; max-width: 100%;
+  background:
+    radial-gradient(circle at 35% 30%, #f2c98f, transparent 60%),
+    linear-gradient(160deg, #dfa066, #b06e42);
+  border: 1px solid #a05e2e;
+  display: flex; align-items: center; justify-content: center;
+  color: #7a4c2a; font-style: italic; font-family: var(--serif);
+  text-align: center; padding: 1rem;
+}
+/* sandstone-arch headshot frame, lit from behind */
+.arch .photo-placeholder { border-radius: 170px 170px 10px 10px; height: 400px; }
+.arch .photo-placeholder::after {
+  content: ""; position: absolute; inset: 0;
+  border-radius: 170px 170px 10px 10px;
+  border: 6px solid rgba(63,79,63,.4); /* juniper-green frame */
+  box-shadow: inset 0 0 30px rgba(92,42,38,.35);
+  pointer-events: none;
+}
+.arch-caption {
+  margin-top: .8rem; text-align: center; font-family: var(--serif);
+  font-size: .85rem; color: var(--ink-soft); letter-spacing: .12em;
+}
+.scroll-hint {
+  position: absolute; bottom: 92px; left: 50%; transform: translateX(-50%);
+  font-size: .75rem; letter-spacing: .12em; color: #7d6350;
+  animation: hint 2.4s ease-in-out infinite;
+}
+@keyframes hint { 0%,100% { transform: translate(-50%,0); opacity:.7 } 50% { transform: translate(-50%,6px); opacity:1 } }
+
+/* ── sections · daylight drains into night ─────────── */
+.section { position: relative; padding: 6rem 8vw; z-index: 1; }
+#about { background: linear-gradient(180deg, #e59c5e, #d97f52); }
+#approach { background: linear-gradient(180deg, #d97f52, #c05a42); }
+.section.green { background: linear-gradient(180deg, #c05a42, #8f4438); } /* juniper greens here */
+#journal { background: linear-gradient(180deg, #8f4438, #6e3a50); }
+.section.indigo { background: linear-gradient(180deg, #6e3a50, #4a3a55); }
+.section.dusk {
+  background: linear-gradient(180deg, #4a3a55, #2c2745 60%, #1c1b2e);
+  color: var(--cream); overflow: hidden;
+}
+
+.section-head { text-align: center; max-width: 640px; margin: 0 auto 3.5rem; }
+.station { font-size: .78rem; letter-spacing: .35em; color: #5e2c1e; }
+.station::before, .station::after { content: " — "; color: #5e2c1e; opacity: .5; }
+.section.green .station { color: #6e8166; }
+.section.indigo .station, .dusk .station { color: #d8c9a8; }
+.station.light { color: #d8c9a8; }
+.station.light::before, .station.light::after { color: #d8c9a8; }
+.station-sub { font-family: var(--serif); font-style: italic; color: #6b4f3d; margin-top: .4rem; }
+.section.green .station-sub { color: #b8a890; }
+.section.indigo .station-sub, .dusk .station-sub { color: rgba(248,240,223,.85); }
+
+.split { display: grid; grid-template-columns: 1.15fr .85fr; gap: 4rem; max-width: 1000px; margin: 0 auto; align-items: start; }
+@media (max-width: 850px) { .split { grid-template-columns: 1fr; } }
+.dropcap::first-letter {
+  font-family: var(--serif); font-size: 3.4em; float: left;
+  line-height: .85; padding-right: .12em; color: #5e2c1e;
+}
+.split p + p { margin-top: 1rem; }
+.facts { list-style: none; margin-top: 1.6rem; display: grid; gap: .5rem; }
+.facts li { border-left: 3px solid #6e8166; padding-left: 1rem; color: #7d6350; }
+.facts strong { color: var(--ink); }
+.photo-placeholder.small { width: 100%; height: 220px; border-radius: 10px; }
+.pullquote {
+  margin-top: 1.4rem; font-size: 1.25rem; font-style: italic;
+  color: #5e2c1e; padding-left: 1.2rem; border-left: 3px solid #6e8166;
+}
+
+/* ── approach — switchbacks ────────────────────────── */
+.switchbacks { position: relative; max-width: 860px; margin: 0 auto; display: grid; gap: 2.6rem; }
+.switchback-line {
+  position: absolute; left: 50%; top: 0; bottom: 0; width: 3px;
+  background: repeating-linear-gradient(180deg, rgba(255,240,215,.55) 0 12px, transparent 12px 24px);
+}
+.switchback { position: relative; width: calc(50% - 2.6rem); }
+.switchback:nth-child(odd) { margin-right: auto; text-align: right; }
+.switchback:nth-child(even) { margin-left: auto; }
+@media (max-width: 700px) {
+  .switchback-line { left: 8px; }
+  .switchback, .switchback:nth-child(odd) { width: auto; margin: 0 0 0 2rem; text-align: left; }
+}
+.switchback::before {
+  content: ""; position: absolute; top: .35rem; width: 14px; height: 14px;
+  border-radius: 50%; background: var(--amber); border: 3px solid #5e2c1e;
+}
+.switchback:nth-child(odd)::before { right: calc(-2.6rem - 9px); }
+.switchback:nth-child(even)::before { left: calc(-2.6rem - 9px); }
+@media (max-width: 700px) {
+  .switchback::before, .switchback:nth-child(odd)::before, .switchback:nth-child(even)::before { left: -2rem; right: auto; }
+}
+.switchback h3 { font-size: 1.3rem; margin-bottom: .3rem; }
+.switchback p { color: #7d6350; font-size: .95rem; }
+
+/* ── ways to work together · no published pricing ── */
+.formats {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.8rem;
+  max-width: 1050px; margin: 0 auto 2.4rem;
+}
+@media (max-width: 900px) { .formats { grid-template-columns: 1fr; max-width: 460px; } }
+.format { border-top: 2px solid #6e8166; padding-top: 1.2rem; }
+.format h3 { font-size: 1.2rem; color: #f2e2c4; margin-bottom: .5rem; }
+.format p { color: #e0c7a8; font-size: .95rem; }
+.formats-note {
+  max-width: 560px; margin: 0 auto 1.8rem; text-align: center;
+  font-family: var(--serif); font-style: italic; color: #f2e2c4;
+  font-size: 1.05rem;
+}
+.centered-actions { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+
+/* ── field notes ──────────────────────────────────── */
+.entries { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.6rem; max-width: 1050px; margin: 0 auto; }
+@media (max-width: 900px) { .entries { grid-template-columns: 1fr; max-width: 420px; } }
+.entry {
+  display: block; background: rgba(248,240,223,.96);
+  border: 1px solid rgba(248,240,223,.2); border-radius: 12px;
+  padding: 1.7rem; transition: transform .25s, box-shadow .25s;
+}
+.entry:hover { transform: translateY(-5px); box-shadow: 0 12px 28px rgba(20,15,25,.35); }
+.entry h3 { font-size: 1.15rem; margin: .5rem 0; }
+.entry p { color: #7d6350; font-size: .93rem; }
+.entry-date { font-size: .72rem; text-transform: uppercase; letter-spacing: .12em; color: #a06a3c; }
+.entry-more { display: inline-block; margin-top: .9rem; color: #c05a42; font-size: .9rem; }
+.centered { text-align: center; margin-top: 2.4rem; }
+
+/* ── client stories ───────────────────────────────── */
+.stories { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.8rem; max-width: 1050px; margin: 0 auto; }
+@media (max-width: 900px) { .stories { grid-template-columns: 1fr; max-width: 420px; } }
+.story {
+  background: rgba(26,22,38,.55);
+  border-radius: 4px; border: 1px solid rgba(216,201,168,.35);
+  box-shadow: 4px 5px 0 rgba(12,10,20,.4);
+  padding: 2rem 1.6rem 1.4rem;
+  color: var(--cream);
+  transform: rotate(-.5deg);
+  transition: transform .3s;
+}
+.story:nth-child(2) { transform: rotate(.6deg); }
+.story:nth-child(3) { transform: rotate(-.25deg); }
+.story:hover { transform: rotate(0) translateY(-4px); }
+.story blockquote { font-size: 1.02rem; font-style: italic; }
+.story figcaption { margin-top: 1rem; font-size: .85rem; color: #d8c9a8; }
+.story figcaption span { color: #a89a8a; }
+
+/* ── discovery call · campfire under the stars ─────── */
+.dusk-inner { text-align: center; max-width: 680px; margin: 0 auto; position: relative; z-index: 3; }
+.dusk h2 { color: var(--cream); }
+.dusk-lede { max-width: 620px; margin: 1rem auto 2.2rem; color: #d8c9a8; font-size: 1.08rem; }
+.dusk-actions { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+.btn.light-ghost { border: 1.5px solid var(--cream); color: var(--cream); }
+.btn.light-ghost:hover { background: var(--cream); color: var(--night); }
+.dusk-note { margin-top: 1.6rem; font-size: .8rem; color: #a89a8a; }
+
+/* campfire */
+.campfire { position: absolute; right: 7vw; bottom: 40px; width: 150px; height: 120px; z-index: 1; }
+.flame {
+  position: absolute; bottom: 12px; left: 50%; transform: translateX(-50%);
+  width: 26px; height: 40px; border-radius: 50% 50% 50% 50% / 62% 62% 38% 38%;
+  background: radial-gradient(ellipse at 50% 85%, #ffe9a8, #f5a54a 60%, #d96a3a);
+  animation: flicker 1.1s ease-in-out infinite alternate;
+}
+@keyframes flicker {
+  from { transform: translateX(-50%) scale(.92, .96); opacity: .85; }
+  to { transform: translateX(-48%) scale(1.06, 1.02); opacity: 1; }
+}
+.glow {
+  position: absolute; bottom: 10px; left: 50%; transform: translateX(-50%);
+  width: 160px; height: 120px; border-radius: 50%;
+  background: radial-gradient(ellipse at 50% 80%, rgba(255,180,80,.4), rgba(217,106,58,.15) 55%, transparent 75%);
+  animation: glowPulse 3.2s ease-in-out infinite alternate;
+}
+@keyframes glowPulse { from { opacity: .7; transform: translateX(-50%) scale(.92) } to { opacity: 1; transform: translateX(-50%) scale(1.06) } }
+.logs {
+  position: absolute; bottom: 0; left: 50%; transform: translateX(-50%);
+  width: 90px; height: 16px;
+  background:
+    linear-gradient(75deg, transparent 40%, #1d1712 40% 60%, transparent 60%),
+    linear-gradient(-75deg, transparent 40%, #3a2e22 40% 60%, transparent 60%);
+  border-radius: 4px;
+}
+@media (max-width: 900px) { .campfire { opacity: .4; } }
+
+/* ── footer · deep night ───────────────────────────── */
+footer.night {
+  position: relative; text-align: center; padding: 3rem 1rem 110px;
+  font-size: .85rem; color: #b8a890;
+  background: linear-gradient(180deg, #1c1b2e, #141326 60%, #101020);
+  overflow: hidden;
+}
+.stars { position: absolute; inset: 0; pointer-events: none; }
+.stars::before, .stars::after {
+  content: "✦ ✧ ✦ ✦ ✧ ✦ ✧ ✦ ✦ ✧ ✦"; display: block;
+  letter-spacing: 2.2em; font-size: .7rem; color: rgba(255,255,255,.6);
+  animation: twinkle 3.5s ease-in-out infinite alternate;
+  padding: 1.2em 0;
+}
+.stars::after { letter-spacing: 3em; animation-delay: 1.6s; font-size: .55rem; color: rgba(255,255,255,.4); }
+@keyframes twinkle { from { opacity: .35 } to { opacity: 1 } }
+footer p { position: relative; z-index: 2; }
+footer p + p { margin-top: .3rem; }
+.foot-links a:hover { color: #fff; }
+.fineprint { font-family: var(--serif); font-style: italic; margin-top: .8rem !important; }
+
+/* ── scroll-reveal ─────────────────────────────────── */
+.reveal { opacity: 0; transform: translateY(28px); transition: opacity .8s ease, transform .8s ease; }
+.reveal.visible { opacity: 1; transform: none; }
+.delay-1 { transition-delay: .12s; }
+.delay-2 { transition-delay: .24s; }
+.delay-3 { transition-delay: .36s; }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .reveal { opacity: 1; transform: none; transition: none; }
+  .canoe-bob, .ripple, .flame, .glow, .scroll-hint, .stars::before, .stars::after { animation: none; }
+  .canoe { transition: none; }
+  .strata, .tree, .sun { display: none; }
+}

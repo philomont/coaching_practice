@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Phil Rogers — Transition &amp; Executive Leadership Coaching</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- ═══════════ THE RIVER — fixed bottom; the canoe drifts with your scroll ═══════════ -->
+<div class="river" aria-hidden="true">
+  <svg class="canoe" id="canoe" viewBox="0 0 240 110">
+    <g class="canoe-bob">
+      <!-- wake -->
+      <path class="wake" d="M208 84 q16 6 30 2 M204 90 q20 8 38 2 M40 84 q-14 6 -26 2 M36 90 q-18 8 -32 2"/>
+      <!-- reflection -->
+      <path class="reflection" d="M55 92 Q120 104 185 92 Q120 112 55 92 Z"/>
+      <!-- paddle -->
+      <line class="paddle-shaft" x1="132" y1="26" x2="152" y2="84"/>
+      <path class="paddle-blade" d="M144 66 q16 -8 22 10 q-14 12 -22 -10 Z"/>
+      <!-- paddler -->
+      <circle class="paddler" cx="116" cy="18" r="7"/>
+      <path class="paddler" d="M106 24 h20 l-3 27 h-14 Z"/>
+      <path class="paddler-arm" d="M122 28 q10 4 12 16"/>
+      <!-- hull -->
+      <path class="hull" d="M28 44 C 46 74, 84 84, 120 86 C 156 84, 194 74, 212 44 C 152 58, 88 58, 28 44 Z"/>
+      <path class="hull-interior" d="M34 47 C 60 64, 180 64, 206 47 C 150 57, 90 57, 34 47 Z"/>
+      <path class="hull-rim" d="M28 44 C 88 58, 152 58, 212 44" fill="none"/>
+    </g>
+  </svg>
+  <svg class="ripples" viewBox="0 0 1200 60" preserveAspectRatio="none">
+    <path class="ripple r1" d="M0 20 Q 60 10 120 20 T 240 20 T 360 20 T 480 20 T 600 20 T 720 20 T 840 20 T 960 20 T 1080 20 T 1200 20 V60 H0 Z"/>
+    <path class="ripple r2" d="M0 32 Q 80 22 160 32 T 320 32 T 480 32 T 640 32 T 800 32 T 960 32 T 1120 32 T 1200 32 V60 H0 Z"/>
+  </svg>
+  <div class="mileage" id="mileage">river mile 0.0</div>
+</div>
+
+<header class="topnav">
+  <a class="wordmark" href="#home">Phil Rogers<span> · Coaching</span></a>
+  <nav>
+    <a href="#about">About</a>
+    <a href="#approach">How I Work</a>
+    <a href="#engagements">Ways to Work</a>
+    <a href="#journal">Journal</a>
+    <a href="#stories">Testimonials</a>
+    <a class="cta" href="#call">Book a Discovery Call</a>
+  </nav>
+</header>
+
+<main>
+
+<!-- ═══════════ HOME — landing · dawn on the rim, juniper country ═══════════ -->
+<section id="home" class="hero">
+  <!-- canyon-wall strata, parallax layers -->
+  <svg class="strata drift s1" viewBox="0 0 1000 400" preserveAspectRatio="xMidYMax slice">
+    <path d="M0 400 L0 240 L120 200 L210 260 L300 180 L420 250 L520 190 L640 240 L760 170 L880 230 L1000 190 L1000 400 Z"/>
+  </svg>
+  <svg class="strata drift s2" viewBox="0 0 1000 300" preserveAspectRatio="xMidYMax slice">
+    <path d="M0 300 L0 180 L90 140 L200 200 L330 120 L460 190 L580 130 L700 180 L820 110 L920 160 L1000 130 L1000 300 Z"/>
+  </svg>
+
+  <!-- junipers -->
+  <svg class="tree juniper j-left drift-slow" viewBox="0 0 140 160" aria-hidden="true">
+    <g class="trunk" stroke-width="7" stroke-linecap="round" fill="none">
+      <path d="M70 158 C66 118 78 100 66 70"/>
+      <path d="M70 104 C84 94 88 84 90 72"/>
+      <path d="M68 128 C54 120 50 110 48 100"/>
+    </g>
+    <g class="foliage">
+      <ellipse cx="66" cy="52" rx="40" ry="30"/>
+      <ellipse cx="30" cy="80" rx="26" ry="21"/>
+      <ellipse cx="102" cy="82" rx="28" ry="22"/>
+      <ellipse cx="68" cy="88" rx="36" ry="24"/>
+    </g>
+    <g class="foliage-dark">
+      <ellipse cx="50" cy="46" rx="22" ry="16"/>
+      <ellipse cx="92" cy="60" rx="18" ry="14"/>
+    </g>
+  </svg>
+  <svg class="tree juniper j-right drift-slow" viewBox="0 0 140 160" aria-hidden="true">
+    <g class="trunk" stroke-width="7" stroke-linecap="round" fill="none">
+      <path d="M70 158 C74 118 62 100 74 70"/>
+      <path d="M70 104 C56 94 52 84 50 72"/>
+      <path d="M72 128 C86 120 90 110 92 100"/>
+    </g>
+    <g class="foliage">
+      <ellipse cx="74" cy="52" rx="40" ry="30"/>
+      <ellipse cx="110" cy="80" rx="26" ry="21"/>
+      <ellipse cx="38" cy="82" rx="28" ry="22"/>
+      <ellipse cx="72" cy="88" rx="36" ry="24"/>
+    </g>
+    <g class="foliage-dark">
+      <ellipse cx="90" cy="46" rx="22" ry="16"/>
+      <ellipse cx="48" cy="60" rx="18" ry="14"/>
+    </g>
+  </svg>
+  <!-- yucca, foreground -->
+  <svg class="plant yucca y-fore" viewBox="0 0 120 110" aria-hidden="true">
+    <g class="blade">
+      <path d="M60 108 C56 74 50 46 34 24 C50 52 58 84 64 108 Z"/>
+      <path d="M58 108 C58 70 58 40 58 10 C62 42 62 76 64 108 Z"/>
+      <path d="M60 108 C66 72 74 44 92 26 C74 54 66 86 62 108 Z"/>
+      <path d="M60 108 C50 84 38 62 18 52 C42 66 52 90 58 108 Z"/>
+      <path d="M60 108 C70 86 82 64 102 54 C80 68 68 92 62 108 Z"/>
+    </g>
+  </svg>
+
+  <div class="hero-inner">
+    <div class="hero-copy">
+      <p class="kicker">Transition &amp; Executive Leadership Coaching</p>
+      <h1>Steadier ground for<br><em>the passage ahead.</em></h1>
+      <p class="lede">
+        I&rsquo;m Phil. I coach executives and professionals through career
+        transitions, leadership stretches, and the moments when the
+        familiar route runs out. Warm, candid, practical — a thinking
+        partner for the terrain you&rsquo;re standing on.
+      </p>
+      <div class="hero-actions">
+        <a class="btn primary" href="#call">Book a free discovery call</a>
+        <a class="btn ghost" href="#about">About Phil ↓</a>
+      </div>
+    </div>
+    <div class="hero-photo arch reveal">
+      <!-- 📸 Replace with your headshot -->
+      <div class="photo-placeholder">your headshot here</div>
+      <div class="arch-caption">Phil Rogers</div>
+    </div>
+  </div>
+  <p class="scroll-hint">scroll — the river begins below</p>
+</section>
+
+<!-- ═══════════ ABOUT · morning light in the canyon ═══════════ -->
+<section id="about" class="section">
+  <div class="section-head">
+    <p class="station">01</p>
+    <h2>About Phil</h2>
+    <p class="station-sub">twenty years around change — leading it, studying it, living it</p>
+  </div>
+  <div class="split">
+    <div class="col reveal">
+      <p class="dropcap">I&rsquo;ve spent twenty years around change: leading
+      teams through it, studying it, and living through my own — the
+      promotions that outgrew me, the pivots that looked reckless from
+      the outside, the quiet question of whether the current path was
+      still the right one. That&rsquo;s where I learned that no one
+      navigates a big transition well alone, and that the right partner
+      makes all the difference.</p>
+      <p>Today I work with leaders and professionals in seasons of change:
+      stepping into larger roles, stepping out of careers that no longer
+      fit, or moving toward something they can&rsquo;t quite name yet.
+      My approach is warm and candid — part thinking partner, part
+      seasoned guide, always in your corner.</p>
+      <ul class="facts">
+        <li><strong>20+ years</strong> leading teams through organizational change</li>
+        <li><strong>Certified</strong> executive &amp; transition coach</li>
+        <li><strong>300+</strong> clients guided to their next chapter</li>
+      </ul>
+    </div>
+    <div class="col reveal delay-1">
+      <div class="photo-placeholder small">photo: you, at home in the field</div>
+      <blockquote class="pullquote">
+        &ldquo;I don&rsquo;t hand clients a plan. I help them read the
+        terrain clearly — and then trust their own footing.&rdquo;
+      </blockquote>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ APPROACH · switchbacks descending the canyon wall ═══════════ -->
+<section id="approach" class="section">
+  <div class="section-head">
+    <p class="station">02</p>
+    <h2>The Approach</h2>
+    <p class="station-sub">how we work together, from first call to landing</p>
+  </div>
+  <div class="switchbacks">
+    <div class="switchback-line"></div>
+    <article class="switchback reveal">
+      <h3>Take stock</h3>
+      <p>An unhurried first session to understand where you actually are —
+      what&rsquo;s working, what&rsquo;s worn, what&rsquo;s calling. No
+      polish required; honest answers serve you best.</p>
+    </article>
+    <article class="switchback reveal delay-1">
+      <h3>Set the direction</h3>
+      <p>Together we define the outcome you&rsquo;re aiming for and the
+      milestones that will get you there. Real goals, real timelines,
+      real accountability.</p>
+    </article>
+    <article class="switchback reveal delay-2">
+      <h3>Do the work</h3>
+      <p>Regular sessions as the work unfolds — progress on the plan,
+      honest work on the hard parts, and course corrections whenever
+      conditions change. They will.</p>
+    </article>
+    <article class="switchback reveal delay-3">
+      <h3>Arrive — and keep the skills</h3>
+      <p>You land where you aimed: clearer, steadier, more yourself.
+      And you keep the judgment and habits that got you there, ready
+      for the next journey.</p>
+    </article>
+  </div>
+</section>
+
+<!-- ═══════════ WAYS TO WORK TOGETHER · no published pricing ═══════════ -->
+<section id="engagements" class="section green">
+  <div class="section-head">
+    <p class="station">03</p>
+    <h2>Ways to Work Together</h2>
+    <p class="station-sub">engagements shaped around the scale of your transition</p>
+  </div>
+  <div class="formats">
+    <article class="format reveal">
+      <h3>Single Sessions</h3>
+      <p>One focused session for a specific decision, a stuck place, or
+      the conversation you keep rehearsing — with a written recap and
+      a clear way forward.</p>
+    </article>
+    <article class="format reveal delay-1">
+      <h3>Monthly Partnership</h3>
+      <p>Ongoing sessions with messaging in between, for role
+      transitions, leadership stretches, and decisions that deserve
+      steady company.</p>
+    </article>
+    <article class="format reveal delay-2">
+      <h3>Long-Term Retainer</h3>
+      <p>Advisory-level partnership for executives in full-scale change
+      — new mandates, restructures, reinventions — with team and
+      board support as needed.</p>
+    </article>
+  </div>
+  <p class="formats-note reveal delay-3">
+    Every engagement is shaped around your goals, calendar, and budget.
+    Details and pricing are shared during your discovery call, and
+    booking is handled through my online scheduler.
+  </p>
+  <div class="centered-actions reveal delay-3">
+    <a class="btn primary" href="#call">Schedule a discovery call</a>
+    <a class="btn ghost" href="mailto:hello@example.com">Ask for details</a>
+  </div>
+</section>
+
+<!-- ═══════════ FIELD NOTES · journal ═══════════ -->
+<section id="journal" class="section">
+  <div class="section-head">
+    <p class="station">04</p>
+    <h2>Field Notes</h2>
+    <p class="station-sub">writing on transitions, leadership, and change — latest entries</p>
+  </div>
+  <div class="entries">
+    <a class="entry reveal" href="#">
+      <p class="entry-date">Oct 2025 · 6 min read</p>
+      <h3>The trapdoor promotion</h3>
+      <p>Why getting everything you wanted can feel like falling — and
+      how to turn the free-fall into steady ground.</p>
+      <span class="entry-more">Read the entry →</span>
+    </a>
+    <a class="entry reveal delay-1" href="#">
+      <p class="entry-date">Sep 2025 · 4 min read</p>
+      <h3>Delegating the weight you were never meant to carry</h3>
+      <p>Notes for leaders who confuse holding everything with doing
+      a good job.</p>
+      <span class="entry-more">Read the entry →</span>
+    </a>
+    <a class="entry reveal delay-2" href="#">
+      <p class="entry-date">Aug 2025 · 8 min read</p>
+      <h3>Seeing the transition before it sees you</h3>
+      <p>On recognizing the early signs of career change — before the
+      current decides for you.</p>
+      <span class="entry-more">Read the entry →</span>
+    </a>
+  </div>
+  <p class="centered"><a class="btn ghost" href="#">Browse the full journal</a></p>
+</section>
+
+<!-- ═══════════ CLIENT STORIES · deep red rock ═══════════ -->
+<section id="stories" class="section redrock">
+  <div class="section-head">
+    <p class="station">05</p>
+    <h2>Client Stories</h2>
+    <p class="station-sub">in their words</p>
+  </div>
+  <div class="stories">
+    <figure class="story reveal">
+      <blockquote>&ldquo;I came to Phil certain I was lost. Six months
+      later I&rsquo;m in a role I helped design — and I stopped needing
+      anyone&rsquo;s permission to want it.&rdquo;</blockquote>
+      <figcaption>— S. M., VP of Product <span>· career pivot, 2024</span></figcaption>
+    </figure>
+    <figure class="story reveal delay-1">
+      <blockquote>&ldquo;Phil doesn&rsquo;t hand you a plan. He asks the
+      question you&rsquo;ve been avoiding, and then makes it safe enough
+      to answer honestly. That combination is rarer than it should be.&rdquo;</blockquote>
+      <figcaption>— D. K., Founder <span>· leadership coaching, 2023</span></figcaption>
+    </figure>
+    <figure class="story reveal delay-2">
+      <blockquote>&ldquo;The transition nearly broke me. The work
+      didn&rsquo;t. I know exactly who I have to thank for the
+      difference.&rdquo;</blockquote>
+      <figcaption>— A. R., Director of Ops <span>· executive transition, 2025</span></figcaption>
+    </figure>
+  </div>
+</section>
+
+<!-- ═══════════ DISCOVERY CALL · dusk, campfire glow ═══════════ -->
+<section id="call" class="section dusk">
+  <div class="dusk-inner reveal">
+    <p class="station light">06</p>
+    <h2>Book a Discovery Call</h2>
+    <p class="dusk-lede">
+      The first step is a free, no-pressure conversation — twenty minutes
+      about where you are and where you&rsquo;re headed. If we&rsquo;re a
+      good fit, we&rsquo;ll both know it. If not, I&rsquo;ll gladly point
+      you toward a colleague I trust.
+    </p>
+    <div class="dusk-actions">
+      <a class="btn primary big" href="#">Pick a time on my calendar</a>
+      <a class="btn light-ghost" href="mailto:hello@example.com">hello@example.com</a>
+    </div>
+    <p class="dusk-note">Calendly embed will live here · replies within
+    one business day</p>
+  </div>
+  <div class="campfire" aria-hidden="true">
+    <div class="glow"></div>
+    <div class="logs"></div>
+  </div>
+</section>
+
+</main>
+
+<footer class="night">
+  <div class="stars" aria-hidden="true"></div>
+  <p>Phil Rogers · Transition &amp; Executive Leadership Coaching</p>
+  <p class="foot-links">
+    <a href="#">Journal</a> · <a href="#">LinkedIn</a> ·
+    <a href="mailto:hello@example.com">hello@example.com</a>
+  </p>
+  <p class="fineprint">© 2025 · Phil Rogers Coaching</p>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>

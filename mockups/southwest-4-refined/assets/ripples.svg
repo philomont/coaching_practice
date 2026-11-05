@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 80">
+  <!--
+    A seamless horizontal wave tile for the river.
+    The pattern repeats every 400 units.
+  -->
+  <g id="wave" class="wave">
+    <path id="ripple-1" class="ripple r1" d="M0 24 Q 50 16 100 24 T 200 24 T 300 24 T 400 24" fill="none" stroke="#a8c5c9" stroke-width="2.5" stroke-linecap="round" opacity="0.55"/>
+    <path id="ripple-2" class="ripple r2" d="M0 40 Q 66 30 133 40 T 266 40 T 400 40" fill="none" stroke="#c4d8da" stroke-width="2" stroke-linecap="round" opacity="0.4"/>
+    <path id="ripple-3" class="ripple r3" d="M0 56 Q 50 48 100 56 T 200 56 T 300 56 T 400 56" fill="none" stroke="#8fb3ba" stroke-width="1.8" stroke-linecap="round" opacity="0.35"/>
+  </g>
+</svg>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{{JOURNAL_TITLE}} — Phil Rogers</title>
+<meta name="description" content="{{JOURNAL_SUB}}">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..700&family=Inter:wght@300..700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="{{ROOT}}style.css">
+</head>
+<body>
+
+<div class="scenery" aria-hidden="true">
+  <div class="scenery-layer mountains-far"><img src="{{ROOT}}assets/strata-hero.svg" alt=""></div>
+  <div class="scenery-layer mountains-near"><img src="{{ROOT}}assets/strata-front.svg" alt=""></div>
+  <div class="scenery-layer sand"><img src="{{ROOT}}assets/sand.svg" alt=""></div>
+</div>
+
+<header class="topnav">
+  <a class="wordmark" href="{{ROOT}}#home">Phil Rogers<span> · Coaching</span></a>
+  <nav>
+    <a href="{{ROOT}}#about">About</a>
+    <a href="{{ROOT}}#approach">How We Work</a>
+    <a href="{{ROOT}}#engagements">Ways to Work</a>
+    <a href="{{ROOT}}journal/">Journal</a>
+    <a href="{{ROOT}}#testimonials">Testimonials</a>
+    <a class="cta btn primary" href="{{ROOT}}#call">Book a Discovery Call</a>
+  </nav>
+</header>
+
+<main>
+<section class="section journal-page">
+  <div class="section-head">
+    <p class="station">{{JOURNAL_STATION}}</p>
+    <h2>{{JOURNAL_TITLE}}</h2>
+    <p class="station-sub">{{JOURNAL_SUB}}</p>
+  </div>
+  <div class="entries">
+    {{ENTRIES_HTML}}
+  </div>
+</section>
+</main>
+
+<footer class="night">
+  <p>{{FOOTER_NOTE}}</p>
+  <p class="foot-links">
+    <a href="{{ROOT}}">Home</a> &middot;
+    <a href="mailto:{{EMAIL}}">{{EMAIL}}</a>
+  </p>
+  <p class="fineprint">&copy; {{YEAR}} &middot; Phil Rogers Coaching</p>
+</footer>
+
+<script src="{{ROOT}}script.js"></script>
+</body>
+</html>

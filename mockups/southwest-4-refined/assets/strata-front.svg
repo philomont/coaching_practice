@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 320">
+  <g id="strata-front" class="strata-front">
+    <!-- closer canyon wall — more saturated and jagged -->
+    <path id="band-light" class="band-light" d="M0 320 L0 175 L70 150 L150 185 L250 130 L360 170 L470 120 L610 160 L760 115 L900 150 L1050 110 L1200 145 L1200 320 Z" fill="#ecdbbd"/>
+    <path id="band-mid" class="band-mid" d="M0 320 L0 220 L110 195 L230 230 L340 190 L470 225 L620 195 L780 230 L940 200 L1200 230 L1200 320 Z" fill="#e3c5a3"/>
+    <path id="band-deep" class="band-deep" d="M0 320 L0 255 L130 240 L280 270 L430 245 L590 275 L780 250 L960 270 L1200 255 L1200 320 Z" fill="#cf9259"/>
+    <path id="band-terra" class="band-terra" d="M0 320 L0 285 L180 275 L380 292 L560 280 L760 295 L940 285 L1200 292 L1200 320 Z" fill="#b0573d"/>
+
+    <!-- strata striations -->
+    <g id="striations" class="striations" fill="none" stroke="#8f3d2c" stroke-width="2" stroke-linecap="round" opacity="0.38">
+      <path d="M0 195 L1200 190"/>
+      <path d="M0 230 L1200 225"/>
+      <path d="M0 270 L1200 265"/>
+      <path d="M0 295 L1200 290"/>
+    </g>
+
+    <!-- vertical cracks and erosion shadows -->
+    <g id="cracks" class="cracks" fill="none" stroke="#6e3b2e" stroke-width="1.8" stroke-linecap="round" opacity="0.45">
+      <path d="M250 130 L258 160 L243 178"/>
+      <path d="M470 120 L462 148 L478 168"/>
+      <path d="M760 115 L754 140 L766 158"/>
+      <path d="M1050 110 L1044 135 L1058 152"/>
+    </g>
+
+    <!-- shadowed undercuts -->
+    <g id="shadows" class="shadows" fill="#b0573d" opacity="0.35">
+      <path d="M0 320 L0 305 L120 295 L120 320 Z"/>
+      <path d="M280 320 L280 300 L430 290 L430 320 Z"/>
+      <path d="M590 320 L590 300 L780 290 L780 320 Z"/>
+      <path d="M960 320 L960 300 L1200 290 L1200 320 Z"/>
+    </g>
+  </g>
+</svg>

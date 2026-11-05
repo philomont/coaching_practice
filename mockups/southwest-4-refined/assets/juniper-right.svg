@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 220 280">
+  <g id="juniper-right" class="juniper juniper-right">
+    <!-- gnarled trunk leaning right -->
+    <g id="trunk" class="trunk" fill="none" stroke="#5a4232" stroke-linecap="round">
+      <path d="M110 278 C 116 230 102 200 116 170" stroke-width="9"/>
+      <path d="M112 215 C 134 198 146 178 154 154" stroke-width="7"/>
+      <path d="M112 188 C 88 166 76 144 68 120" stroke-width="6"/>
+      <path d="M118 238 C 150 222 166 202 178 182" stroke-width="5"/>
+      <path d="M106 246 C 74 230 62 208 56 188" stroke-width="5"/>
+      <path d="M110 170 C 124 132 128 110 126 88" stroke-width="4"/>
+    </g>
+
+    <!-- layered juniper foliage, mirrored silhouette -->
+    <g id="foliage" class="foliage" fill="#5c7350">
+      <ellipse cx="154" cy="152" rx="36" ry="28"/>
+      <ellipse cx="70" cy="122" rx="42" ry="32"/>
+      <ellipse cx="178" cy="186" rx="32" ry="26"/>
+      <ellipse cx="54" cy="190" rx="34" ry="28"/>
+      <ellipse cx="110" cy="168" rx="48" ry="36"/>
+      <ellipse cx="140" cy="106" rx="30" ry="24"/>
+      <ellipse cx="82" cy="96" rx="36" ry="28"/>
+      <ellipse cx="110" cy="62" rx="44" ry="34"/>
+      <ellipse cx="168" cy="136" rx="26" ry="21"/>
+      <ellipse cx="44" cy="150" rx="28" ry="22"/>
+      <ellipse cx="124" cy="130" rx="24" ry="19"/>
+    </g>
+
+    <!-- darker foliage shadow layer -->
+    <g id="foliage-dark" class="foliage-dark" fill="#3e5744" opacity="0.55">
+      <ellipse cx="132" cy="76" rx="26" ry="19"/>
+      <ellipse cx="84" cy="74" rx="28" ry="21"/>
+      <ellipse cx="124" cy="122" rx="32" ry="24"/>
+      <ellipse cx="64" cy="112" rx="30" ry="22"/>
+      <ellipse cx="160" cy="172" rx="22" ry="17"/>
+      <ellipse cx="68" cy="174" rx="24" ry="17"/>
+      <ellipse cx="108" cy="146" rx="34" ry="25"/>
+      <ellipse cx="148" cy="96" rx="18" ry="14"/>
+    </g>
+
+    <!-- juniper berries -->
+    <g id="berries" class="berries" fill="#3a2e26">
+      <circle cx="154" cy="152" r="3"/>
+      <circle cx="144" cy="144" r="2.5"/>
+      <circle cx="70" cy="122" r="3"/>
+      <circle cx="60" cy="130" r="2.5"/>
+      <circle cx="110" cy="168" r="3"/>
+      <circle cx="100" cy="160" r="2.5"/>
+      <circle cx="178" cy="180" r="2.5"/>
+      <circle cx="54" cy="190" r="2.5"/>
+      <circle cx="120" cy="62" r="2.5"/>
+      <circle cx="82" cy="96" r="2"/>
+    </g>
+  </g>
+</svg>

@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 140">
+  <g id="campfire" class="campfire">
+    <!-- crossed logs -->
+    <g id="logs" class="logs" fill="#4a3225">
+      <path d="M40 118 L120 118 L118 128 L38 128 Z"/>
+      <path d="M80 110 L120 132 L112 138 L72 116 Z"/>
+      <path d="M80 110 L40 132 L48 138 L88 116 Z"/>
+      <path d="M44 120 L116 120 L116 124 L44 124 Z" fill="#33261e" opacity="0.4"/>
+    </g>
+
+    <!-- flames -->
+    <g id="flames" class="flames">
+      <path id="flame-outer" class="flame-outer" d="M80 116 C 60 90 55 60 80 30 C 105 60 100 90 80 116 Z" fill="#d96e3a"/>
+      <path id="flame-mid" class="flame-mid" d="M80 110 C 66 90 64 68 80 46 C 96 68 94 90 80 110 Z" fill="#e89a3e"/>
+      <path id="flame-inner" class="flame-inner" d="M80 102 C 72 88 72 74 80 60 C 88 74 88 88 80 102 Z" fill="#f7c457"/>
+    </g>
+
+    <!-- sparks -->
+    <g id="sparks" class="sparks" fill="#ffce6b">
+      <circle cx="70" cy="70" r="1.5"/>
+      <circle cx="90" cy="55" r="1"/>
+      <circle cx="82" cy="45" r="1.2"/>
+    </g>
+  </g>
+</svg>

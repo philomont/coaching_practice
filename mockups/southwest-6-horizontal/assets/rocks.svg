@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1800 520" role="img" aria-label="Two distant rock silhouettes, a mesa and a butte">
+  <!-- Two rock silhouettes with generous margins so the strip tiles sparsely. -->
+  <g id="rocks" class="rocks" fill="#a0604a" opacity="0.9">
+    <!-- distant mesa -->
+    <g id="mesa" class="mesa">
+      <path d="M0 520 L0 470 L40 440 L95 455 L150 420 L230 460 L300 430 L330 520 Z"/>
+      <path d="M0 520 L0 500 L300 500 L300 520 Z" fill="#8f3d2c" opacity="0.5"/>
+    </g>
+    <!-- butte / spire -->
+    <g id="butte" class="butte">
+      <path d="M1180 520 L1180 300 L1210 285 L1240 305 L1260 270 L1290 300 L1310 330 L1350 460 L1390 520 Z"/>
+      <path d="M1180 520 L1180 470 L1390 470 L1390 520 Z" fill="#8f3d2c" opacity="0.5"/>
+    </g>
+  </g>
+</svg>

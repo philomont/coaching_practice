@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 420" role="img" aria-label="Dusk canyon wall in deep terracotta and plum">
+  <g id="strata-dusk" class="strata-dusk">
+    <path id="band-terra" class="band-terra" d="M0 420 L0 210 L160 190 L340 224 L520 186 L720 226 L920 190 L1120 224 L1320 196 L1440 216 L1440 420 Z" fill="#a0573f"/>
+    <path id="band-rust" class="band-rust" d="M0 420 L0 268 L190 250 L400 276 L610 252 L830 278 L1040 258 L1260 276 L1440 262 L1440 420 Z" fill="#7a4636"/>
+    <path id="band-deep" class="band-deep" d="M0 420 L0 318 L220 306 L470 324 L700 310 L950 326 L1200 314 L1440 322 L1440 420 Z" fill="#5a352c"/>
+    <path id="band-plum" class="band-plum" d="M0 420 L0 366 L260 358 L560 372 L860 362 L1160 372 L1440 364 L1440 420 Z" fill="#46303c"/>
+  </g>
+</svg>

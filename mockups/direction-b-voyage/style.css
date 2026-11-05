@@ -1,0 +1,331 @@
+/* ═══════════════════════════════════════════════════════════
+   THE VOYAGE — the sky warms as you travel
+   Palette: dawn cream #fdf6ec · sand #f5dfc0 · coral #e8735a
+            sea deep #1d3a4a / #2b3f52 · lighthouse red #c94f3d
+   The page moves dawn → golden hour → dusk → night as you scroll.
+   ═══════════════════════════════════════════════════════════ */
+
+:root {
+  --cream: #fdf6ec;
+  --sand: #f5dfc0;
+  --ink: #26323d;
+  --ink-soft: #5d6b76;
+  --coral: #e8735a;
+  --coral-dark: #c94f3d;
+  --sea: #1d3a4a;
+  --sea-mid: #2b3f52;
+  --gold: #e0a84f;
+  --serif: Georgia, "Times New Roman", serif;
+  --sans: -apple-system, "Segoe UI", Helvetica, Arial, sans-serif;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: var(--sans); color: var(--ink);
+  background: var(--cream); line-height: 1.65;
+}
+h1, h2, h3, blockquote { font-family: var(--serif); font-weight: 400; }
+h1 { font-size: clamp(2.2rem, 5vw, 3.6rem); line-height: 1.15; margin: .4em 0; }
+h1 em { color: var(--coral); font-style: italic; }
+h2 { font-size: clamp(1.8rem, 3.5vw, 2.6rem); }
+a { color: inherit; text-decoration: none; }
+
+/* ── top nav ─────────────────────────────────────── */
+.topnav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 50;
+  display: flex; justify-content: space-between; align-items: center;
+  padding: .8rem 2rem;
+  background: rgba(253,246,236,.88); backdrop-filter: blur(8px);
+  border-bottom: 1px solid rgba(224,168,79,.35);
+  color: var(--ink);
+}
+.wordmark { font-family: var(--serif); font-size: 1.15rem; }
+.wordmark span { color: var(--ink-soft); font-size: .85rem; }
+.topnav nav { display: flex; gap: 1.4rem; align-items: center; font-size: .9rem; }
+.topnav nav a:hover { color: var(--coral); }
+@media (max-width: 900px) { .topnav nav a:not(.cta) { display: none; } }
+
+.btn {
+  display: inline-block; padding: .65rem 1.4rem; border-radius: 999px;
+  font-size: .95rem; transition: transform .2s, box-shadow .2s, background .2s;
+}
+.btn:hover { transform: translateY(-2px); }
+.btn.primary { background: var(--coral); color: #fff; box-shadow: 0 6px 18px rgba(232,115,90,.4); }
+.btn.primary:hover { background: var(--coral-dark); }
+.btn.ghost { border: 1.5px solid var(--ink); }
+.btn.ghost:hover { background: var(--ink); color: var(--cream); }
+.btn.big { padding: .85rem 1.8rem; font-size: 1.05rem; }
+
+/* ── THE SEA — fixed bottom, boat + waves (signature element) ── */
+.sea {
+  position: fixed; left: 0; right: 0; bottom: 0; height: 72px;
+  z-index: 40; pointer-events: none; overflow: hidden;
+}
+.sea::before {
+  content: ""; position: absolute; inset: 0;
+  background: linear-gradient(180deg, rgba(29,58,74,.55), var(--sea));
+}
+.waves { position: absolute; bottom: 0; width: 100%; height: 60px; }
+.wave { fill: var(--sea-mid); }
+.wave.w1 { opacity: .6; animation: waveSlide 9s linear infinite; }
+.wave.w2 { opacity: .85; animation: waveSlide 14s linear infinite reverse; }
+@keyframes waveSlide { from { transform: translateX(0) } to { transform: translateX(-300px) } }
+
+.boat {
+  position: absolute; bottom: 16px; left: -90px; width: 74px; height: 56px;
+  filter: drop-shadow(0 4px 4px rgba(0,0,0,.25));
+  transition: left .18s linear; /* steered by JS with scroll */
+}
+.boat-rig {
+  transform-origin: 50% 90%;
+  animation: bob 3.2s ease-in-out infinite;
+}
+@keyframes bob { 0%,100% { transform: translateY(0) rotate(-1.5deg) } 50% { transform: translateY(-4px) rotate(1.5deg) } }
+
+.logbook {
+  position: absolute; right: 14px; bottom: 12px; z-index: 2;
+  font-family: var(--serif); font-style: italic; font-size: .78rem;
+  color: #cfe3ea; background: rgba(29,58,74,.55);
+  padding: 2px 10px; border-radius: 999px; border: 1px solid rgba(207,227,234,.25);
+}
+main { padding-bottom: 72px; } /* keep content clear of the sea */
+
+/* ── hero / the harbor · pale dawn ─────────────────── */
+.hero {
+  position: relative; min-height: 100vh; overflow: hidden;
+  display: flex; flex-direction: column; justify-content: center;
+  padding: 120px 6vw 110px;
+  background:
+    linear-gradient(180deg, #fdf6ec 0%, #fbe9cd 62%, #f7d8ae 100%);
+}
+.gulls {
+  position: absolute; top: 16%; left: 8%; width: 300px;
+  fill: none; stroke: #b9a685; stroke-width: 2.2; stroke-linecap: round;
+  animation: gullDrift 26s ease-in-out infinite alternate;
+}
+@keyframes gullDrift { from { transform: translate(0,0) } to { transform: translate(60px,-26px) } }
+
+.hero-inner {
+  position: relative; z-index: 2;
+  display: grid; grid-template-columns: 1.2fr .8fr; gap: 4rem; align-items: center;
+  max-width: 1100px; margin: 0 auto;
+}
+@media (max-width: 850px) { .hero-inner { grid-template-columns: 1fr; } }
+
+.kicker {
+  text-transform: uppercase; letter-spacing: .18em; font-size: .78rem;
+  color: var(--coral-dark); margin-bottom: .5rem;
+}
+.lede { font-size: 1.1rem; color: var(--ink-soft); max-width: 34rem; }
+.hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; margin-top: 1.8rem; }
+
+.hero-photo { justify-self: center; }
+.photo-placeholder {
+  width: 300px; height: 380px; max-width: 100%;
+  background:
+    radial-gradient(circle at 35% 30%, #f2cf9f, transparent 60%),
+    linear-gradient(160deg, #e9d2ab, #d3b184);
+  border: 1px solid #c4a877;
+  display: flex; align-items: center; justify-content: center;
+  color: #8a7350; font-style: italic; font-family: var(--serif);
+  text-align: center; padding: 1rem;
+}
+/* porthole headshot frame */
+.porthole .photo-placeholder { border-radius: 50%; width: 340px; height: 340px; }
+.porthole .photo-placeholder::after {
+  content: ""; position: absolute; margin: -322px 12px 0;
+  width: 316px; height: 316px; border-radius: 50%;
+  border: 6px solid #2b3f52; opacity: .18; pointer-events: none;
+}
+.porthole-caption {
+  margin-top: .8rem; text-align: center; font-family: var(--serif);
+  font-style: italic; font-size: .85rem; color: var(--ink-soft);
+}
+.scroll-hint {
+  position: absolute; bottom: 88px; left: 50%; transform: translateX(-50%);
+  font-size: .75rem; letter-spacing: .12em; color: var(--ink-soft);
+  animation: hint 2.4s ease-in-out infinite;
+}
+@keyframes hint { 0%,100% { transform: translate(-50%,0); opacity:.7 } 50% { transform: translate(-50%,6px); opacity:1 } }
+
+/* ── sections · sky warming with the scroll ────────── */
+.section { position: relative; padding: 6rem 8vw; z-index: 1; }
+.section.chart { background: linear-gradient(180deg, #f7d8ae, #f3cf96); }
+#passage { background: linear-gradient(180deg, #f3cf96, #eec178); }
+.section.golden {
+  background: linear-gradient(180deg, #eec178, #e9a862);
+  border-block: 1px solid rgba(201,79,61,.15);
+}
+#log { background: linear-gradient(180deg, #e9a862, #dd8f63); }
+#bottles { background: linear-gradient(180deg, #dd8f63, #c97a6a); }
+.section.dusk {
+  background: linear-gradient(180deg, #c97a6a, #8d5a70 55%, #4a4468);
+  color: var(--cream);
+  overflow: hidden;
+}
+.section-head { text-align: center; max-width: 640px; margin: 0 auto 3.5rem; }
+.station { font-size: .72rem; text-transform: uppercase; letter-spacing: .22em; color: var(--coral-dark); }
+.golden .station, #log .station { color: #a05e2e; }
+#bottles .station { color: #fff3e0; }
+.station.light { color: var(--gold); }
+.station::before, .station::after { content: " ~~~ "; letter-spacing: 0; }
+.station-sub { font-family: var(--serif); font-style: italic; color: var(--ink-soft); margin-top: .4rem; }
+.dusk .station-sub { color: #e8d5c4; }
+
+.split { display: grid; grid-template-columns: 1.15fr .85fr; gap: 4rem; max-width: 1000px; margin: 0 auto; align-items: start; }
+@media (max-width: 850px) { .split { grid-template-columns: 1fr; } }
+.dropcap::first-letter {
+  font-family: var(--serif); font-size: 3.4em; float: left;
+  line-height: .85; padding-right: .12em; color: var(--coral-dark);
+}
+.split p + p { margin-top: 1rem; }
+.facts { list-style: none; margin-top: 1.6rem; display: grid; gap: .5rem; }
+.facts li { border-left: 3px solid var(--gold); padding-left: 1rem; color: var(--ink-soft); }
+.facts strong { color: var(--ink); }
+.photo-placeholder.small { width: 100%; height: 220px; border-radius: 10px; }
+.pullquote {
+  margin-top: 1.4rem; font-size: 1.25rem; font-style: italic;
+  color: #7a4a2e; padding-left: 1.2rem; border-left: 3px solid var(--coral);
+}
+
+/* ── the passage — waypoints on a dashed chart line ── */
+.chartline { position: relative; max-width: 860px; margin: 0 auto; display: grid; gap: 2.4rem; }
+.chart-dashes {
+  position: absolute; left: 50%; top: 0; bottom: 0; width: 3px;
+  background: repeating-linear-gradient(180deg, rgba(122,74,46,.5) 0 12px, transparent 12px 24px);
+}
+.wp { position: relative; width: calc(50% - 2.4rem); }
+.wp:nth-child(odd) { margin-right: auto; text-align: right; }
+.wp:nth-child(even) { margin-left: auto; }
+@media (max-width: 700px) {
+  .chart-dashes { left: 8px; }
+  .wp, .wp:nth-child(odd) { width: auto; margin: 0 0 0 2rem; text-align: left; }
+}
+.wp::before {
+  content: ""; position: absolute; top: .35rem; width: 14px; height: 14px;
+  border-radius: 50%; background: var(--cream); border: 3px solid var(--coral-dark);
+}
+.wp:nth-child(odd)::before { right: calc(-2.4rem - 9px); }
+.wp:nth-child(even)::before { left: calc(-2.4rem - 9px); }
+@media (max-width: 700px) { .wp::before, .wp:nth-child(odd)::before, .wp:nth-child(even)::before { left: -2rem; right: auto; } }
+.wp-no { font-family: var(--serif); font-style: italic; color: var(--coral-dark); font-size: .95rem; }
+.wp h3 { font-size: 1.3rem; margin: .2rem 0 .3rem; }
+.wp p { color: var(--ink-soft); font-size: .95rem; }
+
+/* ── packs (packages) ──────────────────────────────── */
+.packs { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.6rem; max-width: 1050px; margin: 0 auto; align-items: start; }
+@media (max-width: 900px) { .packs { grid-template-columns: 1fr; max-width: 420px; } }
+.pack {
+  position: relative; background: rgba(255,251,242,.94);
+  border: 1px solid rgba(160,94,46,.25); border-radius: 14px;
+  padding: 2rem 1.7rem; transition: transform .25s, box-shadow .25s;
+}
+.pack:hover { transform: translateY(-6px); box-shadow: 0 14px 34px rgba(120,60,30,.16); }
+.pack.featured { border: 2px solid var(--coral); box-shadow: 0 12px 30px rgba(201,79,61,.22); }
+.pack-flag {
+  position: absolute; top: -12px; left: 50%; transform: translateX(-50%);
+  background: var(--coral-dark); color: #fff; font-size: .7rem;
+  text-transform: uppercase; letter-spacing: .14em;
+  padding: .25rem .9rem; border-radius: 999px; white-space: nowrap;
+}
+.pack-name { font-family: var(--serif); font-size: 1.3rem; color: var(--sea); }
+.pack-price { font-size: 2rem; font-family: var(--serif); margin: .4rem 0 .8rem; }
+.pack-price span { font-size: .85rem; font-family: var(--sans); color: var(--ink-soft); }
+.pack-desc { color: var(--ink-soft); font-size: .95rem; }
+.pack ul { list-style: none; margin: 1.2rem 0; display: grid; gap: .45rem; font-size: .92rem; }
+.pack li::before { content: "✓  "; color: var(--coral-dark); font-weight: bold; }
+
+/* ── captain's log entries ────────────────────────── */
+.entries { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.6rem; max-width: 1050px; margin: 0 auto; }
+@media (max-width: 900px) { .entries { grid-template-columns: 1fr; max-width: 420px; } }
+.entry {
+  display: block; background: rgba(255,251,242,.94);
+  border: 1px solid rgba(160,94,46,.25); border-radius: 12px;
+  padding: 1.7rem; transition: transform .25s, box-shadow .25s;
+}
+.entry:hover { transform: translateY(-5px); box-shadow: 0 12px 28px rgba(120,60,30,.16); }
+.entry h3 { font-size: 1.2rem; margin: .5rem 0; }
+.entry p { color: var(--ink-soft); font-size: .93rem; }
+.entry-date { font-size: .72rem; text-transform: uppercase; letter-spacing: .12em; color: #a05e2e; }
+.entry-more { display: inline-block; margin-top: .9rem; color: var(--coral-dark); font-size: .9rem; }
+.centered { text-align: center; margin-top: 2.4rem; }
+
+/* ── bottles (testimonials) ────────────────────────── */
+.bottles { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.8rem; max-width: 1050px; margin: 0 auto; }
+@media (max-width: 900px) { .bottles { grid-template-columns: 1fr; max-width: 420px; } }
+.bottle {
+  position: relative; background: rgba(255,249,240,.9);
+  border-radius: 60px 60px 18px 18px; /* bottle-ish shoulders */
+  border: 1px solid rgba(160,94,46,.3);
+  padding: 2.4rem 1.6rem 1.4rem;
+  box-shadow: 0 8px 22px rgba(90,40,30,.18);
+}
+.bottle::before { /* cork */
+  content: ""; position: absolute; top: -10px; left: 50%; transform: translateX(-50%);
+  width: 46px; height: 16px; border-radius: 6px 6px 3px 3px;
+  background: linear-gradient(180deg, #d9b98a, #b08d5a);
+}
+.bottle blockquote { font-size: 1.02rem; font-style: italic; }
+.bottle figcaption { margin-top: 1rem; font-size: .85rem; color: #7a4a2e; }
+.bottle figcaption span { color: var(--ink-soft); }
+
+/* ── come aboard · dusk + lighthouse ───────────────── */
+.dusk h2 { color: var(--cream); }
+.lighthouse-scene { text-align: center; max-width: 680px; margin: 0 auto; position: relative; z-index: 3; }
+.dusk-lede { max-width: 620px; margin: 1rem auto 2.2rem; color: #e8d5c4; font-size: 1.08rem; }
+.dusk-actions { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+.btn.light-ghost { border: 1.5px solid var(--cream); color: var(--cream); }
+.btn.light-ghost:hover { background: var(--cream); color: #4a4468; }
+.dusk-note { margin-top: 1.6rem; font-size: .8rem; color: #b8abc2; }
+
+.lighthouse { position: absolute; right: 6vw; bottom: 0; width: 130px; height: 300px; z-index: 1; }
+.tower {
+  position: absolute; bottom: 0; left: 50%; transform: translateX(-50%);
+  width: 54px; height: 180px;
+  background: repeating-linear-gradient(180deg, #c94f3d 0 34px, #f4e7d8 34px 68px);
+  clip-path: polygon(18% 100%, 82% 100%, 62% 0, 38% 0);
+}
+.beam {
+  position: absolute; top: 6px; left: 50%; width: 420px; height: 60px;
+  background: linear-gradient(90deg, rgba(255,236,180,.85), transparent 80%);
+  transform-origin: left center; border-radius: 0 999px 999px 0;
+  animation: beam 7s ease-in-out infinite alternate;
+}
+@keyframes beam { from { transform: rotate(-16deg) } to { transform: rotate(-42deg) } }
+@media (max-width: 900px) { .lighthouse { opacity: .35; } }
+
+/* ── footer · night, stars ────────────────────────── */
+footer.night {
+  position: relative; text-align: center; padding: 3rem 1rem 110px;
+  font-size: .85rem; color: #cfe3ea;
+  background: linear-gradient(180deg, #4a4468, #232d44 60%, var(--sea));
+  overflow: hidden;
+}
+.stars { position: absolute; inset: 0; pointer-events: none; }
+.stars::before, .stars::after {
+  content: "✦ ✧ ✦ ✦ ✧ ✦ ✧ ✦ ✦ ✧ ✦"; display: block;
+  letter-spacing: 2.2em; font-size: .7rem; color: rgba(255,255,255,.65);
+  animation: twinkle 3.5s ease-in-out infinite alternate;
+  padding: 1.2em 0;
+}
+.stars::after { letter-spacing: 3em; animation-delay: 1.6s; font-size: .55rem; color: rgba(255,255,255,.4); }
+@keyframes twinkle { from { opacity: .35 } to { opacity: 1 } }
+footer p { position: relative; z-index: 2; }
+footer p + p { margin-top: .3rem; }
+.foot-links a:hover { color: #fff; }
+.fineprint { font-family: var(--serif); font-style: italic; margin-top: .8rem !important; }
+
+/* ── scroll-reveal ─────────────────────────────────── */
+.reveal { opacity: 0; transform: translateY(28px); transition: opacity .8s ease, transform .8s ease; }
+.reveal.visible { opacity: 1; transform: none; }
+.delay-1 { transition-delay: .12s; }
+.delay-2 { transition-delay: .24s; }
+.delay-3 { transition-delay: .36s; }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .reveal { opacity: 1; transform: none; transition: none; }
+  .boat-rig, .waves path, .beam, .gulls, .scroll-hint, .stars::before, .stars::after { animation: none; }
+  .boat { transition: none; }
+}

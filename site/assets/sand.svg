@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 220" role="img" aria-label="Foreground rolling hills">
+  <g id="sand" class="sand">
+    <path id="dune-back" class="dune-back" d="M0 220 L0 120 Q 90 102 180 120 T 360 120 T 540 120 T 720 120 T 900 120 T 1080 120 T 1260 120 T 1440 120 L1440 220 Z" fill="#ecdbbd" opacity="0.85"/>
+    <path id="dune-front" class="dune-front" d="M0 220 L0 166 Q 90 150 180 166 T 360 166 T 540 166 T 720 166 T 900 166 T 1080 166 T 1260 166 T 1440 166 L1440 220 Z" fill="#d9b183"/>
+    <path id="dune-near" class="dune-near" d="M0 220 L0 196 Q 90 186 180 196 T 360 196 T 540 196 T 720 196 T 900 196 T 1080 196 T 1260 196 T 1440 196 L1440 220 Z" fill="#cf9259"/>
+  </g>
+</svg>

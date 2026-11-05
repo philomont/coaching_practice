@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 220">
+  <g id="yucca" class="yucca">
+    <!-- back blades -->
+    <g id="blades-back" class="blades-back" fill="#58684a" opacity="0.5">
+      <path d="M80 218 C 70 165 58 115 34 72 C 56 120 74 165 78 218 Z"/>
+      <path d="M80 218 C 90 165 102 115 126 72 C 104 120 86 165 82 218 Z"/>
+    </g>
+
+    <!-- main blade fan -->
+    <g id="blades" class="blades" fill="#6b7d55">
+      <path d="M80 218 C 76 160 70 110 46 54 C 66 110 84 160 88 218 Z"/>
+      <path d="M80 218 C 84 150 82 90 80 18 C 78 90 76 150 80 218 Z"/>
+      <path d="M80 218 C 88 160 98 100 124 52 C 100 110 90 160 86 218 Z"/>
+      <path d="M80 218 C 64 170 46 120 20 86 C 50 125 70 170 76 218 Z"/>
+      <path d="M80 218 C 96 170 114 120 140 88 C 112 126 92 170 86 218 Z"/>
+      <path d="M80 218 C 60 190 38 158 14 136 C 42 160 66 192 74 218 Z"/>
+      <path d="M80 218 C 100 190 122 158 146 136 C 118 160 94 192 86 218 Z"/>
+    </g>
+
+    <!-- central lighter stripe on each blade -->
+    <g id="stripes" class="stripes" fill="none" stroke="#8a9179" stroke-width="2" stroke-linecap="round" opacity="0.5">
+      <path d="M46 54 C 60 110 70 160 74 210"/>
+      <path d="M80 18 C 80 90 80 150 80 210"/>
+      <path d="M124 52 C 110 110 90 160 86 210"/>
+      <path d="M20 86 C 40 125 60 170 70 210"/>
+      <path d="M140 88 C 120 126 100 170 90 210"/>
+    </g>
+  </g>
+</svg>

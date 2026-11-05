@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 280 120">
+  <g id="canoe" class="canoe">
+    <!-- water reflection beneath the hull -->
+    <g id="reflection" class="reflection" opacity="0.35">
+      <path d="M28 94 Q 130 112 252 94 Q 130 120 28 94 Z" fill="#2f464b"/>
+    </g>
+
+    <!-- wake lines behind bow and stern -->
+    <g id="wake" class="wake" fill="none" stroke="#d9e8ea" stroke-width="2.5" stroke-linecap="round" opacity="0.6">
+      <path d="M18 86 Q -4 90 -14 82"/>
+      <path d="M18 92 Q -2 98 -16 92"/>
+      <path d="M262 86 Q 284 90 294 82"/>
+      <path d="M262 92 Q 282 98 296 92"/>
+    </g>
+
+    <!-- hull -->
+    <g id="hull" class="hull">
+      <path id="hull-body" class="hull-body" d="M18 48 C 48 78, 92 88, 130 90 C 168 88, 232 78, 262 48 C 230 66, 180 72, 130 74 C 80 72, 50 66, 18 48 Z" fill="#7a4634"/>
+      <path id="hull-interior" class="hull-interior" d="M30 52 C 60 70, 200 70, 250 52 C 210 64, 170 66, 130 67 C 90 66, 70 64, 30 52 Z" fill="#3d251d"/>
+      <path id="gunwale" class="gunwale" d="M18 48 C 50 62, 210 62, 262 48" fill="none" stroke="#a06a48" stroke-width="4" stroke-linecap="round"/>
+      <path id="hull-rim-shadow" class="hull-rim-shadow" d="M18 48 C 50 64, 210 64, 262 48" fill="none" stroke="#5b3021" stroke-width="1.5" opacity="0.5"/>
+      <!-- seat / thwart -->
+      <path d="M104 62 L156 62" stroke="#5b3021" stroke-width="5" stroke-linecap="round"/>
+      <path d="M130 62 L130 70" stroke="#5b3021" stroke-width="3"/>
+    </g>
+
+    <!-- planking lines -->
+    <g id="planking" class="planking" fill="none" stroke="#5b3021" stroke-width="1" opacity="0.35">
+      <path d="M46 56 Q 88 66 130 68"/>
+      <path d="M214 56 Q 172 66 130 68"/>
+      <path d="M56 62 Q 94 72 130 74"/>
+      <path d="M204 62 Q 166 72 130 74"/>
+    </g>
+
+    <!-- seated paddler -->
+    <g id="paddler" class="paddler">
+      <path id="torso" class="torso" d="M108 34 C 106 46 104 56 102 62 L126 62 C 124 56 122 46 120 34 Z" fill="#2f241c"/>
+      <circle id="head" class="head" cx="114" cy="24" r="8" fill="#2f241c"/>
+      <path id="arm-back" class="arm-back" d="M116 38 C 122 44 128 46 134 48" fill="none" stroke="#2f241c" stroke-width="4.5" stroke-linecap="round"/>
+      <path id="arm-front" class="arm-front" d="M112 38 C 120 44 128 48 136 50" fill="none" stroke="#2f241c" stroke-width="4.5" stroke-linecap="round"/>
+    </g>
+
+    <!-- paddle -->
+    <g id="paddle" class="paddle">
+      <line id="paddle-shaft" class="paddle-shaft" x1="134" y1="40" x2="160" y2="88" stroke="#8a5a3c" stroke-width="3.5" stroke-linecap="round"/>
+      <path id="paddle-blade" class="paddle-blade" d="M150 74 Q 172 66 180 88 Q 162 98 150 78 Z" fill="#5b3a2e"/>
+      <path id="paddle-tip" class="paddle-tip" d="M156 82 L160 92" stroke="#5b3a2e" stroke-width="2" stroke-linecap="round"/>
+    </g>
+  </g>
+</svg>

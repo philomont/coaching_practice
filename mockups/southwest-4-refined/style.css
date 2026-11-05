@@ -1,0 +1,364 @@
+/* ═══════════════════════════════════════════════════════════
+   SOUTHWEST 4 — "REFINED CANYON" (high desert, richer art)
+   Palette kept from the approved southwest-1-juniper variant.
+   All decorative art now lives in standalone SVGs in assets/.
+   ═══════════════════════════════════════════════════════════ */
+
+:root {
+  --sky: #f2ece0;
+  --sand-light: #ecdbbd;
+  --sand: #e3c5a3;
+  --ochre: #cf9259;
+  --terra: #b0573d;
+  --terra-dark: #8f3d2c;
+  --rock-mid: #6e3b2e;
+  --rock-deep: #4a2f2a;
+  --juniper: #5c7350;
+  --juniper-dark: #3e5744;
+  --sage: #8a9179;
+  --ink: #33261e;
+  --ink-soft: #6d5a4c;
+  --cream: #f8f3e6;
+  --river: #5d8a92;
+  --river-deep: #3f6b74;
+  --serif: Georgia, "Times New Roman", serif;
+  --sans: -apple-system, "Segoe UI", Helvetica, Arial, sans-serif;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: var(--sans); color: var(--ink);
+  background: var(--sky); line-height: 1.65;
+}
+h1, h2, h3, blockquote { font-family: var(--serif); font-weight: 400; }
+h1 { font-size: clamp(2.2rem, 5vw, 3.6rem); line-height: 1.15; margin: .4em 0; }
+h1 em { color: var(--terra); font-style: italic; }
+h2 { font-size: clamp(1.8rem, 3.5vw, 2.6rem); }
+a { color: inherit; text-decoration: none; }
+
+/* ── top nav ─────────────────────────────────────── */
+.topnav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 50;
+  display: flex; justify-content: space-between; align-items: center;
+  padding: .8rem 2rem;
+  background: rgba(242,236,224,.92); backdrop-filter: blur(8px);
+  border-bottom: 1px solid rgba(176,87,61,.22);
+  color: var(--ink);
+}
+.wordmark { font-family: var(--serif); font-size: 1.15rem; }
+.wordmark span { color: var(--ink-soft); font-size: .85rem; }
+.topnav nav { display: flex; gap: 1.4rem; align-items: center; font-size: .9rem; }
+.topnav nav a:hover { color: var(--terra); }
+@media (max-width: 900px) { .topnav nav a:not(.cta) { display: none; } }
+
+.btn {
+  display: inline-block; padding: .65rem 1.4rem; border-radius: 999px;
+  font-size: .95rem; transition: transform .2s, box-shadow .2s, background .2s;
+}
+.btn:hover { transform: translateY(-2px); }
+.btn.primary { background: var(--terra); color: #fff; box-shadow: 0 6px 18px rgba(176,87,61,.35); }
+.btn.primary:hover { background: var(--terra-dark); }
+.btn.ghost { border: 1.5px solid var(--ink); }
+.btn.ghost:hover { background: var(--ink); color: var(--cream); }
+.btn.big { padding: .85rem 1.8rem; font-size: 1.05rem; }
+
+/* ── THE RIVER — fixed bottom; canoe + seamless waves ── */
+.river {
+  position: fixed; left: 0; right: 0; bottom: 0; height: 86px;
+  z-index: 40; pointer-events: none; overflow: hidden;
+  background: linear-gradient(180deg, rgba(93,138,146,.62), var(--river-deep));
+}
+
+/* seamless wave strip: background-size = viewBox width, translateX only */
+.waves {
+  position: absolute; left: 0; right: 0; top: 0; bottom: 0;
+  background-image: url("assets/ripples.svg");
+  background-size: 400px 100%;
+  background-repeat: repeat-x;
+  opacity: .85;
+}
+.wave-1 { animation: waveSlide 12s linear infinite; }
+.wave-2 {
+  background-position: 0 8px;
+  background-size: 320px 100%;
+  opacity: .55;
+  animation: waveSlide 18s linear infinite reverse;
+}
+.wave-3 {
+  background-position: 0 14px;
+  background-size: 520px 100%;
+  opacity: .4;
+  animation: waveSlide 24s linear infinite;
+}
+@keyframes waveSlide { from { transform: translateX(0) } to { transform: translateX(-400px) } }
+
+/* ── canoe ──
+   .canoe-wrap is positioned with left by JS (scroll travel).
+   .canoe-bob is the inner element with the CSS bob animation.
+   They never share a transform property. */
+.canoe-wrap {
+  position: absolute; bottom: 16px; left: -160px; width: 134px; height: 58px;
+  filter: drop-shadow(0 3px 3px rgba(20,35,40,.35));
+  transition: left .18s linear; /* driven by JS on scroll */
+  z-index: 3;
+}
+.canoe-wrap img { display: block; width: 100%; height: 100%; }
+.canoe-bob { animation: bob 3.4s ease-in-out infinite; }
+@keyframes bob { 0%,100% { transform: translateY(0) rotate(-.8deg) } 50% { transform: translateY(-3px) rotate(.8deg) } }
+
+main { padding-bottom: 86px; } /* keep content clear of the river */
+
+/* ── home / hero · dawn on the rim, juniper country ── */
+.hero {
+  position: relative; min-height: 100vh; overflow: hidden;
+  display: flex; flex-direction: column; justify-content: center;
+  padding: 120px 6vw 110px;
+  background: linear-gradient(180deg, var(--sky) 0%, #f3e4cc 100%);
+}
+
+/* canyon-wall strata as external SVG layers */
+.strata {
+  position: absolute; bottom: 0; left: 0; width: 100%; pointer-events: none;
+}
+.strata.back { bottom: 10%; height: 48%; z-index: 0; }
+.strata.front { bottom: 0; height: 36%; z-index: 1; }
+.strata img { width: 100%; height: 100%; object-fit: cover; object-position: bottom; display: block; }
+
+/* junipers, yucca, sycamore — positioned as scenery layers */
+.tree, .plant {
+  position: absolute; bottom: 6%; pointer-events: none;
+  z-index: 2;
+}
+.juniper-left { left: 2vw; width: clamp(130px, 18vw, 220px); }
+.juniper-right { right: 3vw; bottom: 4%; width: clamp(130px, 18vw, 220px); }
+.yucca-left { left: 14vw; bottom: 2%; width: clamp(80px, 11vw, 150px); z-index: 3; }
+.yucca-right { right: 18vw; bottom: 1%; width: clamp(80px, 11vw, 150px); z-index: 3; }
+.sycamore-left { left: -2vw; bottom: 12%; width: clamp(140px, 20vw, 260px); z-index: 1; }
+.sycamore-right { right: -4vw; bottom: 10%; width: clamp(140px, 20vw, 260px); z-index: 1; }
+
+.tree img, .plant img { width: 100%; height: auto; display: block; }
+
+@media (max-width: 850px) {
+  .juniper-right, .sycamore-right { display: none; }
+  .yucca-right { right: 8vw; }
+}
+
+.hero-inner {
+  position: relative; z-index: 4;
+  display: grid; grid-template-columns: 1.2fr .8fr; gap: 4rem; align-items: center;
+  max-width: 1100px; margin: 0 auto;
+}
+@media (max-width: 850px) { .hero-inner { grid-template-columns: 1fr; } }
+
+.kicker {
+  text-transform: uppercase; letter-spacing: .18em; font-size: .78rem;
+  color: var(--terra); margin-bottom: .5rem;
+}
+.lede { font-size: 1.1rem; color: var(--ink-soft); max-width: 34rem; }
+.hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; margin-top: 1.8rem; }
+
+.hero-photo { justify-self: center; position: relative; }
+.photo-placeholder {
+  width: 300px; height: 380px; max-width: 100%;
+  background:
+    radial-gradient(circle at 35% 30%, #efcfa3, transparent 60%),
+    linear-gradient(160deg, var(--sand-light), #b98f60);
+  border: 1px solid #a87c50;
+  display: flex; align-items: center; justify-content: center;
+  color: #7a5c3a; font-style: italic; font-family: var(--serif);
+  text-align: center; padding: 1rem;
+}
+/* sandstone-arch headshot frame */
+.arch .photo-placeholder { border-radius: 170px 170px 10px 10px; height: 400px; }
+.arch .photo-placeholder::after {
+  content: ""; position: absolute; inset: 0;
+  border-radius: 170px 170px 10px 10px;
+  border: 6px solid rgba(92,115,80,.28); /* juniper-green frame */
+  pointer-events: none;
+}
+.arch-caption {
+  margin-top: .8rem; text-align: center; font-family: var(--serif);
+  font-size: .85rem; color: var(--ink-soft); letter-spacing: .12em;
+}
+.scroll-hint {
+  position: absolute; bottom: 102px; left: 50%; transform: translateX(-50%);
+  font-size: .75rem; letter-spacing: .12em; color: var(--ink-soft);
+  animation: hint 2.4s ease-in-out infinite;
+  z-index: 4;
+}
+@keyframes hint { 0%,100% { transform: translate(-50%,0); opacity:.7 } 50% { transform: translate(-50%,6px); opacity:1 } }
+
+/* ── sections · the descent passes through the green band ── */
+.section { position: relative; padding: 6rem 8vw; z-index: 1; }
+#about { background: linear-gradient(180deg, #f3e4cc, #ecd6b4); }
+#approach { background: linear-gradient(180deg, #ecd6b4, #e3c49a); }
+.section.green { background: linear-gradient(180deg, #d9d7a8, #a8b289); } /* the pinyon-juniper band */
+#journal { background: linear-gradient(180deg, #a8b289, #7f9472); }
+.section.redrock { background: linear-gradient(180deg, #7f9472, #a05a48); }
+.section.dusk {
+  background: linear-gradient(180deg, #a05a48, #6e3b2e 55%, #46303c);
+  color: var(--cream); overflow: hidden;
+}
+
+.section-head { text-align: center; max-width: 640px; margin: 0 auto 3.5rem; }
+.station { font-size: .78rem; letter-spacing: .35em; color: var(--terra); }
+.station::before, .station::after { content: " — "; color: var(--terra); opacity: .5; }
+.section.green .station { color: var(--juniper-dark); }
+.section.green .station::before, .section.green .station::after { color: var(--juniper-dark); }
+.section.redrock .station, #journal .station { color: #fff3e0; }
+.station.light { color: #e8c9a0; }
+.station.light::before, .station.light::after { color: #e8c9a0; }
+.station-sub { font-family: var(--serif); font-style: italic; color: var(--ink-soft); margin-top: .4rem; }
+.section.green .station-sub, .section.redrock .station-sub, .dusk .station-sub { color: rgba(255,250,240,.85); }
+
+.split { display: grid; grid-template-columns: 1.15fr .85fr; gap: 4rem; max-width: 1000px; margin: 0 auto; align-items: start; }
+@media (max-width: 850px) { .split { grid-template-columns: 1fr; } }
+.dropcap::first-letter {
+  font-family: var(--serif); font-size: 3.4em; float: left;
+  line-height: .85; padding-right: .12em; color: var(--terra);
+}
+.split p + p { margin-top: 1rem; }
+.facts { list-style: none; margin-top: 1.6rem; display: grid; gap: .5rem; }
+.facts li { border-left: 3px solid var(--juniper); padding-left: 1rem; color: var(--ink-soft); }
+.facts strong { color: var(--ink); }
+.photo-placeholder.small { width: 100%; height: 220px; border-radius: 10px; }
+.pullquote {
+  margin-top: 1.4rem; font-size: 1.25rem; font-style: italic;
+  color: var(--terra-dark); padding-left: 1.2rem; border-left: 3px solid var(--juniper);
+}
+
+/* ── approach — switchbacks descending the canyon wall ── */
+.switchbacks { position: relative; max-width: 860px; margin: 0 auto; display: grid; gap: 2.6rem; }
+.switchback-line {
+  position: absolute; left: 50%; top: 0; bottom: 0; width: 3px;
+  background: repeating-linear-gradient(180deg, rgba(122,74,46,.45) 0 12px, transparent 12px 24px);
+}
+.switchback { position: relative; width: calc(50% - 2.6rem); }
+.switchback:nth-child(odd) { margin-right: auto; text-align: right; }
+.switchback:nth-child(even) { margin-left: auto; }
+@media (max-width: 700px) {
+  .switchback-line { left: 8px; }
+  .switchback, .switchback:nth-child(odd) { width: auto; margin: 0 0 0 2rem; text-align: left; }
+}
+.switchback::before {
+  content: ""; position: absolute; top: .35rem; width: 14px; height: 14px;
+  border-radius: 50%; background: var(--cream); border: 3px solid var(--terra);
+}
+.switchback:nth-child(odd)::before { right: calc(-2.6rem - 9px); }
+.switchback:nth-child(even)::before { left: calc(-2.6rem - 9px); }
+@media (max-width: 700px) {
+  .switchback::before, .switchback:nth-child(odd)::before, .switchback:nth-child(even)::before { left: -2rem; right: auto; }
+}
+.switchback h3 { font-size: 1.3rem; margin-bottom: .3rem; }
+.switchback p { color: var(--ink-soft); font-size: .95rem; }
+
+/* ── ways to work together · no published pricing ── */
+.formats {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.8rem;
+  max-width: 1050px; margin: 0 auto 2.4rem;
+}
+@media (max-width: 900px) { .formats { grid-template-columns: 1fr; max-width: 460px; } }
+.format {
+  border-top: 2px solid var(--juniper-dark);
+  padding-top: 1.2rem;
+}
+.format h3 { font-size: 1.2rem; color: var(--rock-deep); margin-bottom: .5rem; }
+.format p { color: #3d4a35; font-size: .95rem; }
+.formats-note {
+  max-width: 560px; margin: 0 auto 1.8rem; text-align: center;
+  font-family: var(--serif); font-style: italic; color: #33422d;
+  font-size: 1.05rem;
+}
+.centered-actions { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+.format .btn.ghost { border-color: #33422d; color: #33422d; }
+.format .btn.ghost:hover { background: #33422d; color: var(--cream); }
+
+/* ── field notes ──────────────────────────────────── */
+.entries { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.6rem; max-width: 1050px; margin: 0 auto; }
+@media (max-width: 900px) { .entries { grid-template-columns: 1fr; max-width: 420px; } }
+.entry {
+  display: block; background: var(--cream);
+  border: 1px solid rgba(143,61,44,.2); border-radius: 12px;
+  padding: 1.7rem; transition: transform .25s, box-shadow .25s;
+}
+.entry:hover { transform: translateY(-5px); box-shadow: 0 12px 28px rgba(46,69,42,.25); }
+.entry h3 { font-size: 1.15rem; margin: .5rem 0; }
+.entry p { color: var(--ink-soft); font-size: .93rem; }
+.entry-date { font-size: .72rem; text-transform: uppercase; letter-spacing: .12em; color: #4c6a4f; }
+.entry-more { display: inline-block; margin-top: .9rem; color: var(--terra-dark); font-size: .9rem; }
+.centered { text-align: center; margin-top: 2.4rem; }
+
+/* ── client stories ───────────────────────────────── */
+.stories { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.8rem; max-width: 1050px; margin: 0 auto; }
+@media (max-width: 900px) { .stories { grid-template-columns: 1fr; max-width: 420px; } }
+.story {
+  background: rgba(255,249,240,.94);
+  border-radius: 4px; border: 1px solid rgba(143,61,44,.3);
+  box-shadow: 4px 5px 0 rgba(74,47,42,.25);
+  padding: 2rem 1.6rem 1.4rem;
+  transform: rotate(-.5deg);
+  transition: transform .3s;
+}
+.story:nth-child(2) { transform: rotate(.6deg); }
+.story:nth-child(3) { transform: rotate(-.25deg); }
+.story:hover { transform: rotate(0) translateY(-4px); }
+.story blockquote { font-size: 1.02rem; font-style: italic; }
+.story figcaption { margin-top: 1rem; font-size: .85rem; color: #4a2f2a; }
+.story figcaption span { color: #7c5a50; }
+
+/* ── discovery call · dusk with campfire glow ───────── */
+.dusk-inner { text-align: center; max-width: 680px; margin: 0 auto; position: relative; z-index: 3; }
+.dusk h2 { color: var(--cream); }
+.dusk-lede { max-width: 620px; margin: 1rem auto 2.2rem; color: #e8d5c4; font-size: 1.08rem; }
+.dusk-actions { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+.btn.light-ghost { border: 1.5px solid var(--cream); color: var(--cream); }
+.btn.light-ghost:hover { background: var(--cream); color: var(--rock-deep); }
+.dusk-note { margin-top: 1.6rem; font-size: .8rem; color: #d8bba8; }
+
+.campfire { position: absolute; right: 7vw; bottom: 40px; width: 150px; height: 130px; z-index: 1; }
+.campfire img { width: 100%; height: 100%; display: block; }
+.campfire-glow {
+  position: absolute; bottom: 10px; left: 50%; transform: translateX(-50%);
+  width: 150px; height: 110px; border-radius: 50%;
+  background: radial-gradient(ellipse at 50% 80%, rgba(255,190,90,.55), rgba(255,140,60,.18) 55%, transparent 75%);
+  animation: glowPulse 3.2s ease-in-out infinite alternate;
+}
+@keyframes glowPulse { from { opacity: .75; transform: translateX(-50%) scale(.92) } to { opacity: 1; transform: translateX(-50%) scale(1.06) } }
+@media (max-width: 900px) { .campfire { opacity: .45; } }
+
+/* ── footer · night sky over the canyon ────────────── */
+footer.night {
+  position: relative; text-align: center; padding: 3rem 1rem 120px;
+  font-size: .85rem; color: #d8c6b8;
+  background: linear-gradient(180deg, #46303c, #2c2430 60%, #23302a);
+  overflow: hidden;
+}
+.stars { position: absolute; inset: 0; pointer-events: none; }
+.stars::before, .stars::after {
+  content: "✦ ✧ ✦ ✦ ✧ ✦ ✧ ✦ ✦ ✧ ✦"; display: block;
+  letter-spacing: 2.2em; font-size: .7rem; color: rgba(255,255,255,.6);
+  animation: twinkle 3.5s ease-in-out infinite alternate;
+  padding: 1.2em 0;
+}
+.stars::after { letter-spacing: 3em; animation-delay: 1.6s; font-size: .55rem; color: rgba(255,255,255,.4); }
+@keyframes twinkle { from { opacity: .35 } to { opacity: 1 } }
+footer p { position: relative; z-index: 2; }
+footer p + p { margin-top: .3rem; }
+.foot-links a:hover { color: #fff; }
+.fineprint { font-family: var(--serif); font-style: italic; margin-top: .8rem !important; }
+
+/* ── scroll-reveal ─────────────────────────────────── */
+.reveal { opacity: 0; transform: translateY(28px); transition: opacity .8s ease, transform .8s ease; }
+.reveal.visible { opacity: 1; transform: none; }
+.delay-1 { transition-delay: .12s; }
+.delay-2 { transition-delay: .24s; }
+.delay-3 { transition-delay: .36s; }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .reveal { opacity: 1; transform: none; transition: none; }
+  .canoe-bob, .waves, .campfire-glow, .scroll-hint, .stars::before, .stars::after { animation: none; }
+  .canoe-wrap { transition: none; }
+  .strata, .tree, .plant { display: none; }
+}

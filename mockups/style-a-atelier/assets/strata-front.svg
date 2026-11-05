@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 300" role="img" aria-label="Closer rolling hills in sand and terracotta">
+  <g id="strata-front" class="strata-front">
+    <path id="band-sand" class="band-sand" d="M0 300 L0 140 Q 120 118 240 140 T 480 140 T 720 140 T 960 140 T 1200 140 T 1440 140 L1440 300 Z" fill="#ecdbbd"/>
+    <path id="band-ochre" class="band-ochre" d="M0 300 L0 198 Q 120 180 240 198 T 480 198 T 720 198 T 960 198 T 1200 198 T 1440 198 L1440 300 Z" fill="#e3c5a3"/>
+    <path id="band-terra" class="band-terra" d="M0 300 L0 250 Q 120 236 240 250 T 480 250 T 720 250 T 960 250 T 1200 250 T 1440 250 L1440 300 Z" fill="#cf9259"/>
+    <path id="band-rust" class="band-rust" d="M0 300 L0 280 Q 120 270 240 280 T 480 280 T 720 280 T 960 280 T 1200 280 T 1440 280 L1440 300 Z" fill="#b0573d" opacity="0.7"/>
+  </g>
+</svg>

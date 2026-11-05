@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 500" role="img" aria-label="Nearer canyon strata, deeper tones">
+  <!-- Flat horizontal bands tile seamlessly (repeat-x). Transparent sky above y=300. -->
+  <g id="strata-near" class="strata-near">
+    <path id="band-sand" class="band-sand" d="M0 300 L900 300 L900 500 L0 500 Z" fill="#e3c5a3"/>
+    <path id="band-ochre" class="band-ochre" d="M0 366 L900 366 L900 500 L0 500 Z" fill="#cf9259"/>
+    <path id="band-terra" class="band-terra" d="M0 428 L900 428 L900 500 L0 500 Z" fill="#b0573d"/>
+    <path id="band-rust" class="band-rust" d="M0 472 L900 472 L900 500 L0 500 Z" fill="#8f3d2c" opacity="0.85"/>
+    <g id="striations" class="striations" fill="none" stroke="#6e3b2e" stroke-width="2" stroke-linecap="round" opacity="0.3">
+      <path d="M0 316 L900 316"/>
+      <path d="M0 382 L900 382"/>
+      <path d="M0 444 L900 444"/>
+    </g>
+  </g>
+</svg>

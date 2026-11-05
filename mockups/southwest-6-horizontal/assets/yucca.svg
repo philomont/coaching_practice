@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 220" role="img" aria-label="Single slender yucca silhouette">
+  <g id="yucca" class="yucca">
+    <g id="blades-back" class="blades-back" fill="#6b7d55" opacity="0.4">
+      <path d="M80 218 C 70 165 58 115 34 72 C 56 120 74 165 78 218 Z"/>
+      <path d="M80 218 C 90 165 102 115 126 72 C 104 120 86 165 82 218 Z"/>
+    </g>
+    <g id="blades" class="blades" fill="#7c8c62">
+      <path d="M80 218 C 76 160 70 110 46 54 C 66 110 84 160 88 218 Z"/>
+      <path d="M80 218 C 84 150 82 90 80 18 C 78 90 76 150 80 218 Z"/>
+      <path d="M80 218 C 88 160 98 100 124 52 C 100 110 90 160 86 218 Z"/>
+      <path d="M80 218 C 64 170 46 120 20 86 C 50 125 70 170 76 218 Z"/>
+      <path d="M80 218 C 96 170 114 120 140 88 C 112 126 92 170 86 218 Z"/>
+    </g>
+    <g id="stripes" class="stripes" fill="none" stroke="#8a9179" stroke-width="2" stroke-linecap="round" opacity="0.5">
+      <path d="M46 54 C 60 110 70 160 74 210"/>
+      <path d="M80 18 C 80 90 80 150 80 210"/>
+      <path d="M124 52 C 110 110 90 160 86 210"/>
+    </g>
+  </g>
+</svg>

@@ -1,0 +1,66 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 260 400">
+  <defs>
+    <clipPath id="trunk-clip">
+      <path d="M110 400 L108 320 L100 280 L92 240 L88 200 L90 160 L95 130 L110 110 L150 110 L165 130 L170 160 L172 200 L168 240 L160 280 L152 320 L150 400 Z"/>
+    </clipPath>
+  </defs>
+
+  <g id="sycamore" class="sycamore">
+    <!-- main trunk with pale mottled bark -->
+    <g id="trunk" class="trunk">
+      <path d="M110 400 L108 320 L100 280 L92 240 L88 200 L90 160 L95 130 L110 110 L150 110 L165 130 L170 160 L172 200 L168 240 L160 280 L152 320 L150 400 Z" fill="#d9c9b6"/>
+
+      <!-- bark ridges -->
+      <g clip-path="url(#trunk-clip)" fill="none" stroke="#b5a89a" stroke-width="2" opacity="0.6">
+        <path d="M100 350 Q 130 360 160 350"/>
+        <path d="M95 300 Q 130 310 165 300"/>
+        <path d="M90 250 Q 130 260 170 250"/>
+        <path d="M92 200 Q 130 210 168 200"/>
+        <path d="M95 150 Q 130 160 165 150"/>
+      </g>
+
+      <!-- exfoliating mottled patches -->
+      <g clip-path="url(#trunk-clip)" opacity="0.55">
+        <ellipse cx="120" cy="360" rx="14" ry="22" fill="#c4b5a3"/>
+        <ellipse cx="145" cy="330" rx="12" ry="18" fill="#e8ddd0"/>
+        <ellipse cx="130" cy="280" rx="16" ry="24" fill="#b8a998"/>
+        <ellipse cx="115" cy="230" rx="11" ry="17" fill="#d8cbbd"/>
+        <ellipse cx="150" cy="210" rx="13" ry="20" fill="#c6b8a8"/>
+        <ellipse cx="128" cy="160" rx="15" ry="22" fill="#ddd0c2"/>
+        <ellipse cx="142" cy="135" rx="10" ry="14" fill="#b5a89a"/>
+      </g>
+    </g>
+
+    <!-- branches -->
+    <g id="branches" class="branches" fill="none" stroke="#a89886" stroke-linecap="round">
+      <path d="M130 130 C 90 110 50 100 20 95" stroke-width="6"/>
+      <path d="M130 130 C 160 100 190 70 210 35" stroke-width="5"/>
+      <path d="M132 145 C 190 120 230 110 250 105" stroke-width="5"/>
+      <path d="M120 150 C 80 130 45 125 15 125" stroke-width="4"/>
+      <path d="M128 160 C 150 140 170 125 190 110" stroke-width="4"/>
+    </g>
+
+    <!-- sycamore leaves — broad lobed shapes in pale green -->
+    <g id="leaves" class="leaves" fill="#9aab7c" opacity="0.92">
+      <path d="M10 95 C -5 80 5 65 20 58 C 35 65 45 80 30 95 Z"/>
+      <path d="M210 35 C 195 20 205 5 220 -2 C 235 5 245 20 230 35 Z"/>
+      <path d="M250 105 C 235 90 245 75 260 68 C 275 75 285 90 270 105 Z"/>
+      <path d="M15 125 C 0 110 10 95 25 88 C 40 95 50 110 35 125 Z"/>
+      <path d="M190 110 C 175 95 185 80 200 73 C 215 80 225 95 210 110 Z"/>
+
+      <!-- leaf clusters -->
+      <g transform="translate(60,70) scale(0.8)">
+        <path d="M0 0 C -15 -15 -5 -30 10 -37 C 25 -30 35 -15 20 0 Z"/>
+        <path d="M25 -5 C 10 -20 20 -35 35 -42 C 50 -35 60 -20 45 -5 Z"/>
+      </g>
+      <g transform="translate(100,50) scale(0.9)">
+        <path d="M0 0 C -15 -15 -5 -30 10 -37 C 25 -30 35 -15 20 0 Z"/>
+        <path d="M22 -8 C 7 -23 17 -38 32 -45 C 47 -38 57 -23 42 -8 Z"/>
+      </g>
+      <g transform="translate(160,80) scale(0.75)">
+        <path d="M0 0 C -15 -15 -5 -30 10 -37 C 25 -30 35 -15 20 0 Z"/>
+        <path d="M24 -6 C 9 -21 19 -36 34 -43 C 49 -36 59 -21 44 -6 Z"/>
+      </g>
+    </g>
+  </g>
+</svg>
