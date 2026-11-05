@@ -1,6 +1,6 @@
 ---
-# Global site settings — used across every page on the site.
-title: Phil Rogers — Transition & Executive Leadership Coaching
+# Global site settings, used across every page on the site.
+title: Phil Rogers · Transition & Executive Leadership Coaching
 email: hello@example.com
 schedule_url: https://calendly.com/your-handle/discovery-call
 linkedin_url: "#"

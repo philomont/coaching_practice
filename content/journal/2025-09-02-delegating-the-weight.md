@@ -17,8 +17,8 @@ themselves.
 
 ## Distinguish your work from your worth
 
-The work only you can do — setting direction, developing people,
-making the calls that shape the year — is often invisible from the
+The work only you can do (setting direction, developing people,
+making the calls that shape the year) is often invisible from the
 inside. It doesn’t feel like work because it doesn’t produce the
 satisfying friction of a solved ticket. But that is precisely your
 job now. Everything else is a candidate for handover.
@@ -26,9 +26,9 @@ job now. Everything else is a candidate for handover.
 ## Hand over outcomes, not tasks
 
 Delegation that assigns tasks only moves the weight to someone
-with less context. Delegation that transfers an *outcome* — with
+with less context. Delegation that transfers an *outcome*, with
 its constraints, a check-in rhythm, and genuine authority to
-decide — builds your bench instead of merely unloading your list.
+decide, builds your bench instead of merely unloading your list.
 Expect the first version to be slower and bumpier than doing it
 yourself. That dip is the tuition, and it’s cheaper every time.
 
@@ -36,5 +36,5 @@ yourself. That dip is the tuition, and it’s cheaper every time.
 
 A useful weekly question: what did I do this week that someone
 else could have done without my input? Two honest answers is
-usually the start of a very different quarter — for you and for
+usually the start of a very different quarter, for you and for
 the person who finally got the chance.

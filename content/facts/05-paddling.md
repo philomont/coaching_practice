@@ -1,1 +1,1 @@
-**Coached** paddling teams — dragon boat & canoe
+**Coached** paddling teams: dragon boat & canoe

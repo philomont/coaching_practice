@@ -1,1 +1,1 @@
-**Trained** in the physical sciences — evidence, models, iteration
+**Trained** in the physical sciences: evidence, models, iteration

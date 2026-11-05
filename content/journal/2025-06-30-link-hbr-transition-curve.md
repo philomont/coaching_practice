@@ -3,7 +3,7 @@ title: "Harvard Business Review: the transition curve"
 date: 2025-06-30
 type: link
 link_url: https://hbr.org/
-excerpt: Good external piece on why new roles feel like identity loss before they feel like growth — the research behind the trapdoor feeling.
+excerpt: Good external piece on why new roles feel like identity loss before they feel like growth. The research behind the trapdoor feeling.
 ---
 
 The most honest research I've read on why moving into a bigger
