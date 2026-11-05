@@ -133,7 +133,7 @@ function fmtDate(iso) {
 
 function factsHtml() {
   return collect(path.join(CONTENT, "facts"))
-    .map((it) => `<li>${md(it.body)}</li>`)
+    .map((it) => `<li>${inline(it.body.trim())}</li>`)
     .join("\n        ");
 }
 
