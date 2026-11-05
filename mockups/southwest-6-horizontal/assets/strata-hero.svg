@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 420" role="img" aria-label="Distant mountain ridge with long gentle swells">
+  <g id="strata-hero" class="strata-hero">
+    <!-- distant ridge: long wavelength, low amplitude, rounded crests -->
+    <path id="ridge-far" class="ridge-far" d="M0 420 L0 240 Q 240 190 480 236 T 960 236 T 1440 224 L1440 420 Z" fill="#e9d9c2" opacity="0.7"/>
+    <path id="ridge-front" class="ridge-front" d="M0 420 L0 288 Q 240 252 480 284 T 1130 284 T 1440 274 L1440 420 Z" fill="#eccfae" opacity="0.6"/>
+    <!-- long rolling bands below -->
+    <path id="band-sand" class="band-sand" d="M0 420 L0 322 Q 240 296 480 322 T 960 322 T 1440 322 L1440 420 Z" fill="#e3c5a3"/>
+    <path id="band-ochre" class="band-ochre" d="M0 420 L0 358 Q 240 336 480 358 T 960 358 T 1440 358 L1440 420 Z" fill="#cf9259" opacity="0.6"/>
+  </g>
+</svg>
