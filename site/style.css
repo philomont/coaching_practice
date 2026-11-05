@@ -381,3 +381,18 @@ footer p + p { margin-top: .35rem; }
 @media (prefers-reduced-motion: reduce) {
   .modal, .modal-card { transition: none; }
 }
+
+/* ── photos: auto-picked-up by filename ──
+   site/assets/headshot.* → hero photo
+   site/assets/about.*    → about photo
+   (jpg, jpeg, png, webp, avif, gif) */
+.hero-photo img {
+  width: 310px; height: 390px; max-width: 100%;
+  object-fit: cover; display: block;
+  border-radius: var(--radius);
+  box-shadow: 0 30px 70px rgba(32,29,26,.16);
+}
+.about-photo {
+  width: 100%; height: 220px; object-fit: cover; display: block;
+  border-radius: 14px;
+}

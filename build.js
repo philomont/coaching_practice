@@ -99,6 +99,30 @@ function collect(dir) {
 }
 
 const MONTHS = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+
+const PHOTO_EXTS = ["jpg", "jpeg", "png", "webp", "avif", "gif"];
+function findPhoto(stem) {
+  for (const ext of PHOTO_EXTS) {
+    if (fs.existsSync(path.join(SITE, "assets", stem + "." + ext))) {
+      return stem + "." + ext;
+    }
+  }
+  return null;
+}
+
+function heroPhoto(root) {
+  const file = findPhoto("headshot");
+  return file
+    ? `<img src="${root}assets/${file}" alt="Phil Rogers">`
+    : '<div class="photo-placeholder">your headshot here</div>';
+}
+
+function aboutPhoto(root) {
+  const file = findPhoto("about");
+  return file
+    ? `<img src="${root}assets/${file}" alt="Phil in the field" class="about-photo">`
+    : '<div class="photo-placeholder small">photo: you, at home in the field</div>';
+}
 function fmtDate(iso) {
   const m = String(iso).match(/^(\d{4})-(\d{2})-(\d{2})$/);
   if (!m) return String(iso);
@@ -239,11 +263,12 @@ function main() {
     CTA_PRIMARY: esc(home.fm.cta_primary),
     CTA_SECONDARY: esc(home.fm.cta_secondary),
     PHOTO_CAPTION: esc(home.fm.photo_caption),
+    HERO_PHOTO: heroPhoto(""),
     ABOUT_STATION: esc(about.fm.station),
     ABOUT_TITLE: esc(about.fm.title),
     ABOUT_SUB: esc(about.fm.sub),
     ABOUT_BODY: md(about.body),
-    ABOUT_PHOTO_CAPTION: esc(about.fm.photo_caption),
+    ABOUT_PHOTO: aboutPhoto(""),
     PULL_QUOTE: esc(about.fm.pull_quote),
     FACTS_HTML: factsHtml(),
     APPROACH_STATION: esc(approach.fm.station),

@@ -95,8 +95,12 @@ and `link` (card opens an external article directly).
 
 ## Before going live
 
-- **Headshot:** drop `headshot.jpg` into `site/assets/`, then replace the
-  hero placeholder block in `site/template.html` (marked with a comment).
+- **Headshot:** drop your photo into `site/assets/` as `headshot.jpg`
+  (or `.png`, `.webp`, etc.). The build picks it up automatically —
+  the hero placeholder is replaced with your photo. Use roughly a
+  **4:5 portrait** (e.g. 1200×1500 or so); any size works, it is
+  cropped to fit. The About-section photo works the same way with the
+  filename `about.jpg`.
 - **Calendar:** set `schedule_url` in `content/site.md` to your Calendly
   (or other scheduler) link.
 - **Contact form/email:** the buttons currently use `mailto:`; a

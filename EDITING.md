@@ -191,6 +191,18 @@ update on the next build.
 
 **Change the email or booking link** — `content/site.md`.
 
+**Add photos** — put image files in `site/assets/` using conventional
+file names; the build picks them up automatically:
+
+| File name | Appears as |
+|---|---|
+| `headshot.jpg` (or `.png`/`.webp`/…) | landing-page headshot (≈4:5 portrait) |
+| `about.jpg` (or other image extension) | the second photo in the About section |
+
+Until a file exists, the corresponding placeholder stays visible.
+Captions come from `content/home.md` (`photo_caption`) — the About
+placeholder text lives in the About photo file itself.
+
 **Change anything visual** — `site/style.css` (theme), `site/template.html`
 (structure), `site/assets/*.svg` (scenery artwork, hand-editable in
 Inkscape/Illustrator/Figma).
