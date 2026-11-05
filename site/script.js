@@ -49,4 +49,47 @@
     window.addEventListener("resize", onScroll);
     update();
   }
+
+  /* ── 3. testimonial modal ────────────────────────── */
+  const modal = document.getElementById("t-modal");
+  if (modal) {
+    const nameEl = modal.querySelector(".modal-name");
+    const bodyEl = modal.querySelector(".modal-body");
+    const closeBtn = modal.querySelector(".modal-close");
+    let lastFocus = null;
+
+    function open(fig) {
+      const tpl = fig.querySelector("template.t-full");
+      const name = fig.querySelector(".story-more")?.dataset.name
+        || (fig.querySelector("figcaption")?.textContent || "").replace(/^[—\\s]+/, "");
+      nameEl.textContent = name.trim();
+      bodyEl.innerHTML = tpl ? tpl.innerHTML : "";
+      lastFocus = document.activeElement;
+      modal.classList.add("open");
+      modal.setAttribute("aria-hidden", "false");
+      document.body.style.overflow = "hidden";
+      closeBtn.focus();
+    }
+
+    function close() {
+      modal.classList.remove("open");
+      modal.setAttribute("aria-hidden", "true");
+      document.body.style.overflow = "";
+      if (lastFocus) lastFocus.focus();
+    }
+
+    document.querySelectorAll(".story").forEach((fig) => {
+      if (!fig.querySelector(".story-more")) return;
+      fig.addEventListener("click", () => open(fig));
+      fig.style.cursor = "pointer";
+    });
+
+    closeBtn.addEventListener("click", close);
+    modal.addEventListener("click", (e) => {
+      if (e.target === modal) close(); /* backdrop click */
+    });
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape" && modal.classList.contains("open")) close();
+    });
+  }
 })();

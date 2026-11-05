@@ -138,15 +138,26 @@ function formatsHtml() {
   }).join("\n    ");
 }
 
+const TYPE_LABEL = { essay: "Essay", note: "Note", link: "Link" };
+
 function entriesHtml(posts, root, startDelayAt = 0) {
   const delays = ["", " delay-1", " delay-2", " delay-3"];
   return posts.map((p, i) => {
+    const type = p.fm.type || "essay";
     const d = delays[(i + startDelayAt) % delays.length];
-    return `<a class="entry reveal${d}" href="${root}journal/${p.slug}/">
-      <p class="entry-date">${fmtDate(p.fm.date)} &middot; ${esc(p.fm.minutes || "")} min read</p>
+    const isLink = type === "link";
+    const metaParts = [fmtDate(p.fm.date)];
+    if (p.fm.minutes) metaParts.push(`${esc(p.fm.minutes)} min read`);
+    metaParts.push(TYPE_LABEL[type] || "Essay");
+    const href = isLink ? esc(p.fm.link_url || "#") : `${root}journal/${p.slug}/`;
+    const more = isLink ? "Visit the linked piece &rarr;"
+      : type === "note" ? "Read the note &rarr;"
+      : "Read the entry &rarr;";
+    return `<a class="entry entry--${type} reveal${d}" href="${href}"${isLink ? ' target="_blank" rel="noopener"' : ""}>
+      <p class="entry-date">${metaParts.join(" &middot; ")}</p>
       <h3>${esc(p.fm.title || "")}</h3>
       <p>${esc(p.fm.excerpt || "")}</p>
-      <span class="entry-more">Read the entry &rarr;</span>
+      <span class="entry-more">${more}</span>
     </a>`;
   }).join("\n    ");
 }
@@ -155,11 +166,25 @@ function storiesHtml() {
   const delays = ["", " delay-1", " delay-2", " delay-3"];
   return collect(path.join(CONTENT, "testimonials")).map((it, i) => {
     const d = delays[i % delays.length];
+    const excerpt = it.fm.excerpt || fallbackExcerpt(it.body);
+    const full = md(it.body);
+    const open = full
+      ? `<button class="story-more" type="button" data-name="${esc(it.fm.name || "")}">Read the full note &rarr;</button>`
+      : "";
+    const tpl = full ? `<template class="t-full">${full}</template>` : "";
     return `<figure class="story reveal${d}">
-      <blockquote>&ldquo;${md(it.body)}&rdquo;</blockquote>
+      <blockquote>&ldquo;${esc(excerpt)}&rdquo;</blockquote>
       <figcaption>&mdash; ${esc(it.fm.name || "")}</figcaption>
+      ${open}
+      ${tpl}
     </figure>`;
   }).join("\n    ");
+}
+
+function fallbackExcerpt(body) {
+  const first = (body || "").split(/\r?\n\r?\n/)[0] || "";
+  const text = first.replace(/\*\*/g, "").replace(/\*/g, "");
+  return text.length > 160 ? text.slice(0, 157).replace(/\s+\S*$/, "") + "…" : text;
 }
 
 /* ── page assembly ───────────────────────────────────────────── */
@@ -260,19 +285,19 @@ function main() {
     ENTRIES_HTML: entriesHtml(posts, "../"),
   }));
 
-  /* ── individual posts ── */
+  /* ── individual posts (essay + note; link posts have no local page) ── */
   const pTemplate = fs.readFileSync(path.join(SITE, "post-template.html"), "utf8");
   posts.forEach((p) => {
+    const type = p.fm.type || "essay";
+    if (type === "link") return;
+    const metaParts = [fmtDate(p.fm.date)];
+    if (p.fm.minutes) metaParts.push(`${esc(p.fm.minutes)} min read`);
     write(path.join(OUT, "journal", p.slug, "index.html"), subst(pTemplate, {
       ...navMap("../../", site),
       POST_TITLE: esc(p.fm.title),
-      POST_DATE: fmtDate(p.fm.date),
-      POST_MINUTES: esc(p.fm.minutes || ""),
+      POST_META: metaParts.join(" &middot; "),
       POST_EXCERPT: esc(p.fm.excerpt || ""),
-      POST_BODY: md(p.body)
-        .split(/\r?\n/)
-        .map((l) => l.replace(/^{{POST_BODY}}$/, ""))
-        .join("\n"),
+      POST_BODY: md(p.body),
     }));
   });
 

@@ -4,6 +4,10 @@ Static site for a boutique transition & executive leadership coaching
 practice, hosted on **GitHub Pages**. All content is plain **markdown**;
 a zero-dependency build script turns it into the finished site.
 
+📖 **Full content guide: [`EDITING.md`](EDITING.md)** — every markdown file
+explained, how to post a journal entry, the three post formats, and
+testimonial modal usage.
+
 ```
 repo/
 ├── content/            ← EDIT HERE — all the site's words
@@ -81,6 +85,13 @@ One-time setup on GitHub:
 3. Push. The site goes live at `https://<user>.github.io/<repo>/`.
 
 The build uses only relative links, so it works at any Pages sub-path.
+
+**Testimonial cards** show a short excerpt; clicking a card opens a
+modal with the full testimonial text.
+
+**Journal posts** support three formats via the `type` field:
+`essay` (full-length, own page), `note` (short observation, own page),
+and `link` (card opens an external article directly).
 
 ## Before going live
 
