@@ -21,12 +21,21 @@ with a glassy panel.
 
 ---
 
-## Style explorations (latest round)
+## Style explorations
 
-Four restyles of the approved *southwest-5-clean* baseline — same
+Five restyles of the approved *southwest-5-clean* baseline — same
 content, same parallax machinery, different visual personalities. Each
 has a small chip in the bottom-right corner naming it. All use Fraunces
-+ Inter, no prices, professional copy:
++ Inter, no prices, professional copy.
+
+**All five now carry the v2 features:** clickable testimonial cards
+(excerpt on the card, full text in a modal), role-based attributions
+(former direct report, mentee, coaching supervisor), and the journal
+reflecting the three post formats — **Essay / Note / Link** style
+labels (in `style-e-gallery-modern`: mixed cards demonstrating each —
+entry labels show `date · minutes · type`, the note card is visually
+quieter, and the link card opens the external piece directly). The
+production build implements all of this in `build.js` + `EDITING.md`.
 
 ### Style A — "Atelier" (`style-a-atelier/`)
 Refined editorial. Warm paper grounds, hairline rules between sections,
