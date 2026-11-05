@@ -18,3 +18,10 @@ understanding your values, naming your goals in your own words, and
 iterating with you on concrete steps that bring your leadership
 objectives to life — using the resources you actually have, not
 a fantasy version of them.
+
+Alongside leadership coaching, I've spent years on the water
+coaching paddling teams — dragon boating and canoeing. Steering a
+crew of very different people toward the same finish line taught me
+a lot of what shows up in my sessions: shared rhythm beats
+individual strength, and honest, immediate feedback lands best
+when it's given in service of the goal.
