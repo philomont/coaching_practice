@@ -220,9 +220,14 @@ function subst(template, map) {
 }
 
 function navMap(root, site) {
+  const digits = String(site.fm.phone || "").replace(/[^0-9+]/g, "");
+  const phoneDisplay = String(site.fm.phone || "")
+    .replace(/^(\d{3})(\d{3})(\d{4})/, "($1) $2-$3");
   return {
     TITLE: site.fm.title,
     EMAIL: site.fm.email,
+    PHONE: phoneDisplay,
+    PHONE_HREF: digits ? "tel:" + digits : "#",
     LINKEDIN_URL: site.fm.linkedin_url || "#",
     FOOTER_NOTE: site.fm.footer_note,
     YEAR: new Date().getFullYear(),
