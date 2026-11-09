@@ -2,7 +2,7 @@
 station: 01
 title: About Phil
 sub: a partner for the leadership work that matters to you
-pull_quote: “I don’t hand you a plan. We talk through what matters to you, and then build the next step together.”
+pull_quote: “I don’t generate you a plan. We communicate on what matters to you, and then build the next step together.”
 photo_caption: photo: you, at home in the field
 ---
 
