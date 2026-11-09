@@ -72,6 +72,11 @@ front matter is the markdown body.
 | `note`, `cta_primary`, `cta_secondary` | engagements + call CTAs |
 | `body` | discovery-call paragraph (call.md) |
 
+> **Voice rule:** quotes and captions written by Phil are kept *exactly*
+> as written, even when they read unconventionally — only spelling
+> errors and mechanical typos get fixed. "Generate you a plan" and
+> "communicate on" are Phil's deliberate phrasing and are left alone.
+
 Everything below the front matter in these files is ignored — keep notes
 to yourself there if you like.
 
