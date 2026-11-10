@@ -92,4 +92,12 @@
       if (e.key === "Escape" && modal.classList.contains("open")) close();
     });
   }
+
+  /* ── 3. wordmark font preview picker (temporary) ─── */
+  const fontSelect = document.getElementById("font-select");
+  if (fontSelect) {
+    fontSelect.addEventListener("change", () => {
+      document.documentElement.setAttribute("data-font", fontSelect.value);
+    });
+  }
 })();
