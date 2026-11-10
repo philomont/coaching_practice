@@ -48,7 +48,7 @@ a { color: inherit; text-decoration: none; }
   box-shadow: 0 10px 40px rgba(32,29,26,.12);
 }
 .wordmark {
-  display: inline-flex; align-items: center; gap: .3rem;
+  display: inline-flex; align-items: center; gap: .15rem;
   font-family: var(--sans); font-size: 1rem; letter-spacing: .01em;
 }
 .wordmark .wm-main {
