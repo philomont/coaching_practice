@@ -203,6 +203,13 @@ file names; the build picks them up automatically:
 |---|---|
 | `headshot.jpg` (or `.png`/`.webp`/…) | landing-page headshot (≈4:5 portrait) |
 | `about.jpg` (or other image extension) | the second photo in the About section |
+| `favicon.svg` (or `.ico`/`.png`) | browser-tab icon — used automatically on every page |
+| `logo.svg` (or other image extension) | small mark shown before the "2π" wordmark in the nav |
+
+**Favicons:** SVG is recommended (it scales); if you provide a `.png`,
+export it at 512×512 so it stays crisp. If several are present, all are
+declared and the browser picks. A first-cut "2π" favicon ships with the
+site — overwrite `favicon.svg` with your own mark any time.
 
 Until a file exists, the corresponding placeholder stays visible.
 Captions come from `content/home.md` (`photo_caption`) — the About
