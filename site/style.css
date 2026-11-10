@@ -409,3 +409,10 @@ footer p + p { margin-top: .35rem; }
   margin-right: .45rem;
   border-radius: 6px;
 }
+
+/* ── footer signature mark (site/assets/white.png) ── */
+.footer-mark {
+  width: 52px; height: 52px;
+  display: block; margin: 0 auto 1rem;
+  opacity: .9;
+}

@@ -123,10 +123,11 @@ function faviconLinks(root) {
   return links.length ? "\n" + links.join("\n") : "";
 }
 
-/* nav logo: logo.svg preferred, then raster */
+/* nav logo: logo.svg preferred, then raster; falls back to the "2π" text glyph */
 function logoHtml(root) {
   const file = findAsset("logo", ICON_EXTS);
-  return file ? `<img src="${root}assets/${file}" alt="" class="wordmark-logo"> ` : "";
+  if (file) return `<img src="${root}assets/${file}" alt="2\u03c0" class="wordmark-logo"> `;
+  return "2\u03c0";
 }
 
 function findPhoto(stem) {

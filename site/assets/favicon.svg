@@ -1,8 +1,9 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="2π Coaching logo">
-  <!-- sandstone tile -->
-  <rect width="64" height="64" rx="14" fill="#fcfbf9"/>
-  <rect x="1" y="1" width="62" height="62" rx="13" fill="none" stroke="#e3c5a3" stroke-width="2"/>
-  <!-- the full circle: 2π radians of arc, drawn almost complete on purpose -->
-  <circle cx="32" cy="32" r="21" fill="none" stroke="#b0573d" stroke-width="3.5" stroke-linecap="round" stroke-dasharray="120 12" transform="rotate(-90 32 32)"/>
-  <text x="32" y="41" text-anchor="middle" font-family="Georgia, 'Times New Roman', serif" font-size="24" fill="#201d1a">2π</text>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 150.65623 150.65631" role="img" aria-label="2π Coaching">
+  <style>
+    .mark { fill: #201d1a; }
+    @media (prefers-color-scheme: dark) { .mark { fill: #fcfbf9; } }
+  </style>
+  <g transform="translate(-32.465885,-25.979355)">
+    <path class="mark" d="path9"/>
+  </g>
 </svg>
