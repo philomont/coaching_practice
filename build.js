@@ -365,6 +365,7 @@ function main() {
   });
 
   /* ── static assets ── */
+  fs.rmSync(path.join(OUT, "assets"), { recursive: true, force: true }); /* clear stale files */
   fs.mkdirSync(path.join(OUT, "assets"), { recursive: true });
   for (const f of ["style.css", "script.js"]) {
     fs.copyFileSync(path.join(SITE, f), path.join(OUT, f));
