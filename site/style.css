@@ -51,20 +51,14 @@ a { color: inherit; text-decoration: none; }
   display: inline-flex; align-items: center; gap: .3rem;
   font-family: var(--sans); font-size: 1rem; letter-spacing: .01em;
 }
-.wordmark .wm-main { font-weight: 600; color: var(--ink); }
+.wordmark .wm-main {
+  font-family: "Fraunces", Georgia, serif;
+  font-weight: 500; font-style: italic;
+  font-size: 1.06rem;
+  color: var(--ink);
+}
 .wordmark .wm-sub { color: var(--ink-soft); font-weight: 400; font-size: .8rem; }
 
-/* ── wordmark font preview dropdown (temporary) ── */
-[data-font="fraunces"] .wm-main
-  { font-family: "Fraunces", serif; font-weight: 550; }
-[data-font="fraunces-italic"] .wm-main
-  { font-family: "Fraunces", serif; font-weight: 500; font-style: italic; letter-spacing: 0; }
-[data-font="playfair"] .wm-main
-  { font-family: "Playfair Display", serif; font-weight: 600; }
-[data-font="lora"] .wm-main
-  { font-family: "Lora", serif; font-weight: 600; }
-[data-font="cormorant"] .wm-main
-  { font-family: "Cormorant Garamond", serif; font-weight: 700; font-size: 1.08rem; }
 .topnav nav { display: flex; gap: 1.5rem; align-items: center; font-size: .87rem; }
 .topnav nav a:not(.cta):hover { color: var(--terra); }
 @media (max-width: 920px) { .topnav nav { display: none; } }
