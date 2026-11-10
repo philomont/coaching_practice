@@ -101,13 +101,36 @@ function collect(dir) {
 const MONTHS = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
 
 const PHOTO_EXTS = ["jpg", "jpeg", "png", "webp", "avif", "gif"];
-function findPhoto(stem) {
-  for (const ext of PHOTO_EXTS) {
+const ICON_EXTS = ["svg", "png", "jpg", "jpeg", "webp"];
+function findAsset(stem, exts) {
+  for (const ext of exts) {
     if (fs.existsSync(path.join(SITE, "assets", stem + "." + ext))) {
       return stem + "." + ext;
     }
   }
   return null;
+}
+
+/* favicon: prefers favicon.svg, then .ico, then .png */
+function faviconLinks(root) {
+  const links = [];
+  if (fs.existsSync(path.join(SITE, "assets", "favicon.svg")))
+    links.push(`<link rel="icon" type="image/svg+xml" href="${root}assets/favicon.svg">`);
+  if (fs.existsSync(path.join(SITE, "assets", "favicon.ico")))
+    links.push(`<link rel="icon" href="${root}assets/favicon.ico" sizes="any">`);
+  if (fs.existsSync(path.join(SITE, "assets", "favicon.png")))
+    links.push(`<link rel="icon" type="image/png" href="${root}assets/favicon.png">`);
+  return links.length ? "\n" + links.join("\n") : "";
+}
+
+/* nav logo: logo.svg preferred, then raster */
+function logoHtml(root) {
+  const file = findAsset("logo", ICON_EXTS);
+  return file ? `<img src="${root}assets/${file}" alt="" class="wordmark-logo"> ` : "";
+}
+
+function findPhoto(stem) {
+  return findAsset(stem, PHOTO_EXTS);
 }
 
 function heroPhoto(root) {
@@ -213,6 +236,13 @@ function fallbackExcerpt(body) {
 
 /* ── page assembly ───────────────────────────────────────────── */
 
+function replaceTokens(template, map, root) {
+  const full = { ...map, FAVICON_LINKS: faviconLinks(root), LOGO: logoHtml(root) };
+  return template.replace(/\{\{([A-Z0-9_]+)\}\}/g, (all, key) =>
+    full[key] !== undefined ? full[key] : all
+  );
+}
+
 function subst(template, map) {
   return template.replace(/\{\{([A-Z0-9_]+)\}\}/g, (all, key) =>
     map[key] !== undefined ? map[key] : all
@@ -232,6 +262,8 @@ function navMap(root, site) {
     FOOTER_NOTE: site.fm.footer_note,
     YEAR: new Date().getFullYear(),
     ROOT: root,
+    FAVICON_LINKS: faviconLinks(root),
+    LOGO: logoHtml(root),
   };
 }
 
