@@ -276,6 +276,10 @@ footer p + p { margin-top: .35rem; }
 .delay-2 { transition-delay: .24s; }
 .delay-3 { transition-delay: .36s; }
 
+/* stories heading stays on one line on wide screens */
+#testimonials .section-head { max-width: 900px; }
+@media (min-width: 1100px) { #testimonials h2 { white-space: nowrap; } }
+
 /* style chip (mockup preview aid) */
 .style-chip {
   position: fixed; bottom: 18px; right: 18px; z-index: 60;
