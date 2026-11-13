@@ -375,7 +375,18 @@ footer p + p { margin-top: .35rem; }
   padding: 2.8rem 2.6rem 2.2rem;
   box-shadow: 0 40px 90px rgba(0,0,0,.35);
   transform: translateY(14px); transition: transform .25s ease;
+  scrollbar-width: thin;                     /* Firefox */
+  scrollbar-color: var(--terra) transparent;
 }
+/* WebKit: terracotta pill floating free of the card edge */
+.modal-card::-webkit-scrollbar { width: 10px; }
+.modal-card::-webkit-scrollbar-track { background: transparent; }
+.modal-card::-webkit-scrollbar-thumb {
+  background: var(--terra);
+  border-radius: 999px;
+  border: 3px solid #fcfbf9;   /* inset: visually detaches from card edge */
+}
+.modal-card::-webkit-scrollbar-thumb:hover { background: var(--terra-dark); }
 .modal.open .modal-card { transform: none; }
 .modal-name {
   font-family: var(--serif); font-weight: 450;
