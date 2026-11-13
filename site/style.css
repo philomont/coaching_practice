@@ -376,32 +376,29 @@ footer p + p { margin-top: .35rem; }
   box-shadow: 0 40px 90px rgba(0,0,0,.35);
   transform: translateY(14px); transition: transform .25s ease;
 }
-/* the scroller is an inner box, inset clear of the rounded corners:
-   the native overlay scrollbar lands on straight edge, 10px inside the card */
+/* the scroller: native scrollbar fully hidden; the JS rail below does the visuals.
+   The inner box stays inset inside the rounded card, clear of the corners. */
 .modal-scroll {
   max-height: 85vh;
   margin: 10px 10px 10px 0;
   padding: 2.6rem 2.9rem 2.2rem 2.6rem;
   overflow-y: auto;
-  scrollbar-width: thin;                     /* Firefox */
-  scrollbar-color: var(--terra) transparent;
+  scrollbar-width: none;                 /* Firefox */
+  -ms-overflow-style: none;              /* legacy Edge */
 }
-.modal-card::-webkit-scrollbar { width: 8px; }
-.modal-card::-webkit-scrollbar-track { background: transparent; }
-.modal-card::-webkit-scrollbar-thumb {
-  background: var(--terra);
-  border-radius: 999px;
+.modal-scroll::-webkit-scrollbar { display: none; }
+
+/* custom rail + thumb: always identical caps on every browser */
+.scroll-rail {
+  position: absolute; top: 14px; bottom: 14px; right: 8px; width: 6px;
+  border-radius: 999px; background: rgba(32,29,26,.08);
 }
-.modal-card::-webkit-scrollbar-thumb:hover { background: var(--terra-dark); }
-.modal-card::-webkit-scrollbar-button { display: none; height: 0; }
-.modal-scroll::-webkit-scrollbar { width: 8px; }
-.modal-scroll::-webkit-scrollbar-track { background: transparent; }
-.modal-scroll::-webkit-scrollbar-thumb {
-  background: var(--terra);
-  border-radius: 999px;
+.scroll-thumb {
+  position: absolute; right: 0; width: 6px;
+  border-radius: 999px; background: var(--terra); cursor: grab;
 }
-.modal-scroll::-webkit-scrollbar-thumb:hover { background: var(--terra-dark); }
-.modal-scroll::-webkit-scrollbar-button { display: none; height: 0; }
+.scroll-thumb:hover { background: var(--terra-dark); }
+.scroll-thumb.is-dragging { background: var(--terra-dark); }
 .modal.open .modal-card { transform: none; }
 .modal-name {
   font-family: var(--serif); font-weight: 450;

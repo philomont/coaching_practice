@@ -56,7 +56,23 @@
     const nameEl = modal.querySelector(".modal-name");
     const bodyEl = modal.querySelector(".modal-body");
     const closeBtn = modal.querySelector(".modal-close");
+    const scroller = modal.querySelector(".modal-scroll");
+    const rail = modal.querySelector(".scroll-rail");
+    const thumb = modal.querySelector(".scroll-thumb");
     let lastFocus = null;
+
+    function updateBar() {
+      if (!modal.classList.contains("open")) return;
+      const { scrollTop, scrollHeight, clientHeight } = scroller;
+      const track = rail.clientHeight;
+      const thumbH = Math.max(40, Math.round((clientHeight / scrollHeight) * track));
+      const maxScroll = Math.max(1, scrollHeight - clientHeight);
+      const top = Math.round((scrollTop / maxScroll) * (track - thumbH));
+      const show = scrollHeight > clientHeight + 4;
+      rail.style.display = show ? "block" : "none";
+      thumb.style.height = thumbH + "px";
+      thumb.style.top = top + "px";
+    }
 
     function open(fig) {
       const tpl = fig.querySelector("template.t-full");
@@ -68,6 +84,8 @@
       modal.classList.add("open");
       modal.setAttribute("aria-hidden", "false");
       document.body.style.overflow = "hidden";
+      scroller.scrollTop = 0;                 /* always open at the top */
+      requestAnimationFrame(updateBar);
       closeBtn.focus();
     }
 
@@ -83,6 +101,29 @@
       fig.addEventListener("click", () => open(fig));
       fig.style.cursor = "pointer";
     });
+
+    /* custom rail: drag the thumb; wheel/touch still work natively */
+    let dragging = false, dragStartY = 0, dragStartTop = 0;
+    thumb.addEventListener("pointerdown", (e) => {
+      dragging = true;
+      dragStartY = e.clientY;
+      dragStartTop = parseFloat(thumb.style.top) || 0;
+      thumb.classList.add("is-dragging");
+      thumb.setPointerCapture(e.pointerId);
+      e.preventDefault();
+    });
+    thumb.addEventListener("pointermove", (e) => {
+      if (!dragging) return;
+      const track = rail.clientHeight - thumb.clientHeight;
+      const maxScroll = Math.max(1, scroller.scrollHeight - scroller.clientHeight);
+      const top = Math.min(track, Math.max(0, dragStartTop + e.clientY - dragStartY));
+      thumb.style.top = top + "px";
+      scroller.scrollTop = (top / (track || 1)) * maxScroll;
+    });
+    const stopDrag = () => { dragging = false; thumb.classList.remove("is-dragging"); };
+    thumb.addEventListener("pointerup", stopDrag);
+    thumb.addEventListener("pointercancel", stopDrag);
+    window.addEventListener("resize", updateBar);
 
     closeBtn.addEventListener("click", close);
     modal.addEventListener("click", (e) => {
