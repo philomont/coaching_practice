@@ -31,13 +31,13 @@ big goal, or simply from moving when they feel stuck.
 
 It also held up a mirror. I can feel myself vacillating between the
 negative attractor and the positive one, and I know the routines I
-fall into that trigger each: the late-afternoon push to check tasks
-off a list is usually my negative attractor at work, while a walk
-without a podcast, or a conversation that starts with what went
-well, reliably pulls me back toward the positive one. The book is
-better at naming these states than at warning you how ordinary the
-triggers are. You don't need a crisis to flip into problem-solving
-mode. Tuesday is enough.
+fall into that trigger each: hours heads-down staring at a screen
+reliably pulls me toward the negative attractor, while
+one-on-one conversations with colleagues, or getting out for a
+canoe paddle with friends, reliably brings me back to the positive
+one. The book is better at naming these states than at warning you
+how ordinary the triggers are. You don't need a crisis to flip into
+problem-solving mode. Tuesday is enough.
 
 ## Where it fell short for me
 
