@@ -123,6 +123,9 @@
     const stopDrag = () => { dragging = false; thumb.classList.remove("is-dragging"); };
     thumb.addEventListener("pointerup", stopDrag);
     thumb.addEventListener("pointercancel", stopDrag);
+
+    /* wheel/touch/kbd scrolling moves the thumb too */
+    scroller.addEventListener("scroll", updateBar, { passive: true });
     window.addEventListener("resize", updateBar);
 
     closeBtn.addEventListener("click", close);
