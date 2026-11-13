@@ -1,8 +1,8 @@
 ---
-title: Helping People Change — a book review
+title: Helping People Change · a book review
 date: 2026-11-10
 minutes: 5
-excerpt: How your emotional state shapes whether someone can actually hear coaching — a solid foundation for helping people through blind spots, and a fair critique of where it falls short.
+excerpt: How your emotional state shapes whether someone can actually hear coaching. A solid foundation for helping people through blind spots, and a fair critique of where it falls short.
 ---
 
 I picked up *Helping People Change* by Richard Boyatzis, Melvin Smith,
@@ -19,15 +19,25 @@ their problems and shortcomings, you awaken what the authors call
 the negative emotional attractor: defensiveness, stress, a closed
 posture. When you help someone connect with their hopes and their
 best image of themselves, you awaken the positive emotional
-attractor instead — openness, curiosity, energy for change.
+attractor instead: openness, curiosity, energy for change.
 
 Reading it, I kept thinking about how much of my own coaching
 practice already lives in that idea. A person's positive or negative
-emotional state can deeply impact their propensity for being coached
-— and honestly, for thinking positively about their own future. The
+emotional state can deeply impact their propensity for being coached,
+and honestly, for thinking positively about their own future. The
 book establishes solid foundations for anyone looking to help
 someone through the blind spots or trappings that keep them from a
 big goal, or simply from moving when they feel stuck.
+
+It also held up a mirror. I can feel myself vacillating between the
+negative attractor and the positive one, and I know the routines I
+fall into that trigger each: the late-afternoon push to check tasks
+off a list is usually my negative attractor at work, while a walk
+without a podcast, or a conversation that starts with what went
+well, reliably pulls me back toward the positive one. The book is
+better at naming these states than at warning you how ordinary the
+triggers are. You don't need a crisis to flip into problem-solving
+mode. Tuesday is enough.
 
 ## Where it fell short for me
 
@@ -40,7 +50,7 @@ research under it.
 
 This isn't a bad thing. But it doesn't make for a title you will
 reach for as a reference, or one where you worry you missed
-something if you didn't finish — or if you spaced out for a chapter
+something if you didn't finish, or if you spaced out for a chapter
 or two while listening, as I did with the audiobook.
 
 ## Who I'd hand it to
