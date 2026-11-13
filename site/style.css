@@ -378,15 +378,17 @@ footer p + p { margin-top: .35rem; }
   scrollbar-width: thin;                     /* Firefox */
   scrollbar-color: var(--terra) transparent;
 }
-/* WebKit: terracotta pill floating free of the card edge */
-.modal-card::-webkit-scrollbar { width: 10px; }
+/* WebKit: terracotta pill floating inside the rounded edge */
+.modal-card::-webkit-scrollbar { width: 12px; }
 .modal-card::-webkit-scrollbar-track { background: transparent; }
 .modal-card::-webkit-scrollbar-thumb {
   background: var(--terra);
   border-radius: 999px;
-  border: 3px solid #fcfbf9;   /* inset: visually detaches from card edge */
+  border: 3.5px solid #fcfbf9;                 /* inset: floats inside */
+  box-shadow: inset 0 0 0 1.5px #fcfbf9;       /* clips cap arrows into the pill */
 }
 .modal-card::-webkit-scrollbar-thumb:hover { background: var(--terra-dark); }
+.modal-card::-webkit-scrollbar-button { display: none; height: 0; }
 .modal.open .modal-card { transform: none; }
 .modal-name {
   font-family: var(--serif); font-weight: 450;
