@@ -263,6 +263,7 @@ function navMap(root, site) {
     FOOTER_NOTE: site.fm.footer_note,
     YEAR: new Date().getFullYear(),
     ROOT: root,
+    BUILD_STAMP: Math.floor(fs.statSync(__filename).mtimeMs),
     FAVICON_LINKS: faviconLinks(root),
     LOGO: logoHtml(root),
   };
