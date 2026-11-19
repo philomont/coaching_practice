@@ -1,5 +1,6 @@
 ---
-title: Helping People Change · a book review
+title: Helping People Change
+type: review
 date: 2026-11-10
 minutes: 5
 excerpt: How your emotional state shapes whether someone can actually hear coaching. A solid foundation for helping people through blind spots, and a fair critique of where it falls short.

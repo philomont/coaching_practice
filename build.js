@@ -186,7 +186,7 @@ function formatsHtml() {
   }).join("\n    ");
 }
 
-const TYPE_LABEL = { essay: "Essay", note: "Note", link: "Link" };
+const TYPE_LABEL = { essay: "Essay", note: "Note", link: "Link", review: "Review" };
 
 function entriesHtml(posts, root, startDelayAt = 0) {
   const delays = ["", " delay-1", " delay-2", " delay-3"];
