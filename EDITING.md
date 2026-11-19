@@ -162,6 +162,22 @@ Anything below the front matter is optional extra context; link posts do
 not get their own page — the card opens the external link directly.
 ```
 
+**4. `review` (book or podcast review, like an essay with its own label)**
+
+```markdown
+---
+title: Helping People Change
+type: review
+date: 2026-11-10
+minutes: 5
+excerpt: One-sentence take for the card.
+---
+
+Body in markdown, same as an essay. The listing shows it with the
+"Review" label instead of "Essay", so the title doesn't need to
+say "a book review" on the end.
+```
+
 Mixing formats is encouraged — a journal that alternates essays, short
 notes, and shared reads reads like a person, not a publication.
 
