@@ -194,9 +194,7 @@ function entriesHtml(posts, root, startDelayAt = 0) {
     const type = p.fm.type || "essay";
     const d = delays[(i + startDelayAt) % delays.length];
     const isLink = type === "link";
-    const metaParts = [fmtDate(p.fm.date)];
-    if (p.fm.minutes) metaParts.push(`${esc(p.fm.minutes)} min read`);
-    metaParts.push(TYPE_LABEL[type] || "Essay");
+    const metaParts = [fmtDate(p.fm.date), TYPE_LABEL[type] || "Essay"];
     const href = isLink ? esc(p.fm.link_url || "#") : `${root}journal/${p.slug}/`;
     const more = isLink ? "Visit the linked piece &rarr;"
       : type === "note" ? "Read the note &rarr;"
@@ -355,7 +353,6 @@ function main() {
     const type = p.fm.type || "essay";
     if (type === "link") return;
     const metaParts = [fmtDate(p.fm.date)];
-    if (p.fm.minutes) metaParts.push(`${esc(p.fm.minutes)} min read`);
     write(path.join(OUT, "journal", p.slug, "index.html"), subst(pTemplate, {
       ...navMap("../../", site),
       POST_TITLE: esc(p.fm.title),
