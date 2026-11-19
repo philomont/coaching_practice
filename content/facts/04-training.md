@@ -1,1 +1,1 @@
-**Received** leadership training for teams ranging from technical to sport. Currently pursuing coaching certification
+**Accepted** into the Organizational Leadership Coaching Certificate program at UVA's School of Continuing & Professional Studies · Spring 2027
