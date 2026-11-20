@@ -1,5 +1,5 @@
 ---
-kicker: Coaching for Technical Leaders
+kicker: Leadership Coaching for Innovative Organizations
 h1: I’m here for you,
 h1_em: so you can be there for your team.
 lede: I’m Phil. I work closely with leaders to understand what actually matters to you. Your values, your goals, the resources you already have: then we build the path forward together, adjusting as we go. No scripts, just steady, honest partnership. My specialty is technical leaders: the engineers and scientists who find themselves moving into management as their fields experience rapid innovation and transformation. And if you’re local, I coach in person in the Northern Virginia and DC area.
