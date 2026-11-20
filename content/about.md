@@ -31,6 +31,14 @@ rigor they already trust, pointed at decisions and people instead
 of systems and data. That said, you don’t have to be a leader in a
 technical organization to find value in this approach.
 
+A former boss once described my greatest strength plainly: coaching
+extremely technical people. That is the work I have done best across
+my organizations, and it matters more now than ever. As AI
+accelerates organizations and lifts deeply technical people into
+leadership, more leaders arrive in their seats the way I did:
+expert in the technology, still growing into the leadership. That is
+exactly the coaching I do best.
+
 Alongside leadership coaching, I’ve led professional teams of my own, and
 I’ve spent years on the water coaching paddling teams. Helping people
 achieve their goals has been one of life’s most rewarding experiences, and my hope is
