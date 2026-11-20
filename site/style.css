@@ -415,10 +415,9 @@ footer p + p { margin-top: .35rem; }
 }
 .modal-close:hover { background: var(--terra); border-color: var(--terra); color: #fff; }
 
-/* journal entry format variants */
-.entry--note { background: rgba(252,251,249,.78); }
-.entry--note .entry-date,
-.entry--link .entry-date { color: var(--terra-dark); }
+/* journal entry format note: cards are uniform in style;
+   only the small meta label carries the format name */
+.entry--note { background: #fcfbf9; }
 
 @media (prefers-reduced-motion: reduce) {
   .modal, .modal-card { transition: none; }
