@@ -4,7 +4,7 @@ title: 2π Coaching · Phil Rogers · Leadership Coaching for Innovative Organiz
 email: phil@2picoaching.com
 phone: 202-524-0023
 schedule_url: https://calendar.app.google/K7s4PpSk71tNNbiL6
-linkedin_url: "#"
+linkedin_url: https://www.linkedin.com/in/pro9er5/
 footer_note: 2π Coaching · Phil Rogers · Leadership Coaching for Innovative Organizations
 ---
 
