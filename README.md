@@ -77,7 +77,56 @@ cd docs && python3 -m http.server 8000
 ## Publishing
 
 The included GitHub Actions workflow (`.github/workflows/deploy.yml`)
-builds and deploys automatically on every push to `main`.
+builds and deploys automatically on every push to `main`. The site
+publishes to GitHub Pages: **https://philomont.github.io/coaching_practice/**
+(Pages source is already set to GitHub Actions; DNS/CI verified working).
+
+The build uses only relative links, so it also works if you later serve
+the site from a different Pages path.
+
+## Custom domain setup (Cloudflare)
+
+Once you have a domain on Cloudflare:
+
+1. **Tell the build the domain:** create `content/domain.txt` containing
+   the domain (e.g. `2pi-coaching.com`). The build then emits a `CNAME`
+   file into `docs/` on every deploy, which keeps the Pages custom
+   domain binding alive. Also tell me the domain so it gets configured
+   in the repo's Pages settings.
+
+2. **Add DNS records in the Cloudflare dashboard** (domain → DNS →
+   Records). For the apex domain and `www`:
+
+   | Type | Name | Content | Proxy status |
+   |---|---|---|---|
+   | A | `@` | `185.199.108.153` | **DNS only** (gray cloud) |
+   | A | `@` | `185.199.109.153` | **DNS only** |
+   | A | `@` | `185.199.110.153` | **DNS only** |
+   | A | `@` | `185.199.111.153` | **DNS only** |
+   | CNAME | `www` | `philomont.github.io` | **DNS only** |
+
+   **The proxy toggle is the one Cloudflare-specific gotcha:** records
+   for GitHub Pages must be **DNS only (gray cloud)**, not proxied
+   (orange). Proxied records hide the GitHub IPs, which breaks GitHub's
+   custom-domain verification and Let's Encrypt certificate issuance
+   (and can cause redirect loops). If you later want Cloudflare's
+   proxy/DDoS protection back in front, that's a post-launch project
+   with its own SSL/TLS mode configuration (Full) — not day one.
+
+3. **Verify before wiring GitHub:** once records are added, check them
+   from a terminal: `nslookup yourdomain.com` should return the four
+   `185.199.x` IPs (if it returns Cloudflare IPs, the proxy toggle is
+   still orange).
+
+4. **Enable Enforce HTTPS:** after GitHub verifies the domain (I'll do
+   the Pages-side custom-domain step), flip on *Settings → Pages →
+   Enforce HTTPS*. The certificate auto-issues within a few minutes to
+   an hour of DNS going live.
+
+5. **Optional Cloudflare niceties** (any time): *SSL/TLS → Edge
+   Certificates → Always Use HTTPS* for redirecting http→https, and a
+   redirect rule from the bare domain to `www` (or vice versa) if you
+   have a canonical preference.
 
 One-time setup on GitHub:
 1. Repo → **Settings → Pages** → Source: **GitHub Actions**.

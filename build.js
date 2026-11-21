@@ -372,6 +372,11 @@ function main() {
   for (const f of fs.readdirSync(assetsDir)) {
     fs.copyFileSync(path.join(assetsDir, f), path.join(OUT, "assets", f));
   }
+  if (fs.existsSync(path.join(CONTENT, "domain.txt"))) {
+    const domain = fs.readFileSync(path.join(CONTENT, "domain.txt"), "utf8").trim();
+    if (domain) fs.writeFileSync(path.join(OUT, "CNAME"), domain + "\n");
+    console.log("custom domain:", domain || "(domain.txt empty)");
+  }
   console.log("copied style.css, script.js, assets/ → docs/");
   console.log(`\nBuilt ${posts.length} journal post(s). Done.`);
 }
