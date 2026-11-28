@@ -28,9 +28,17 @@ function parseRaw(raw) {
   let body = raw;
   const m = raw.match(/^---\r?\n([\s\S]*?)\r?\n---\r?\n?([\s\S]*)$/);
   if (m) {
+    let lastKey = null;
     for (const line of m[1].split(/\r?\n/)) {
+      if (!line.trim()) { continue; }
       const kv = line.match(/^([A-Za-z0-9_-]+)\s*:\s*(.*)$/);
-      if (kv) fm[kv[1].trim()] = kv[2].trim().replace(/^["'](.*)["']$/, "$1");
+      if (kv) {
+        lastKey = kv[1].trim();
+        fm[lastKey] = kv[2].trim().replace(/^["'](.*)["']$/, "$1");
+      } else if (lastKey) {
+        /* wrapped continuation of the previous value */
+        fm[lastKey] += " " + line.trim();
+      }
     }
     body = m[2];
   }
