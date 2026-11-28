@@ -150,7 +150,30 @@
 
     let start = 0;
     let animating = false;
+    let measuredAtWidth = 0;
 
+    /* Pin the track's height to the tallest card so cycling never
+       changes the container height. Measured with every card unhidden
+       and align-items lifted, then cards revert to stretch (equal). */
+    function equalizeHeights() {
+      const w = storiesTrack.clientWidth;
+      if (w === measuredAtWidth) return;
+      measuredAtWidth = w;
+      const hidden = [];
+      cards.forEach(c => {
+        if (c.classList.contains("is-hidden")) { hidden.push(c); c.classList.remove("is-hidden"); }
+      });
+      storiesTrack.style.alignItems = "flex-start";
+      let max = 0;
+      cards.forEach(c => { max = Math.max(max, c.offsetHeight); });
+      storiesTrack.style.alignItems = "";
+      hidden.forEach(c => c.classList.add("is-hidden"));
+      if (max > 0) {
+        const cs = getComputedStyle(storiesTrack);
+        const pad = parseFloat(cs.paddingTop) + parseFloat(cs.paddingBottom);
+        storiesTrack.style.height = (max + pad) + "px";
+      }
+    }
     function visibleCount() {
       if (window.matchMedia("(max-width: 640px)").matches) return 1;
       if (window.matchMedia("(max-width: 960px)").matches) return 2;
@@ -227,9 +250,22 @@
       ?.addEventListener("click", () => shift(-1));
     storiesTrack.parentElement.querySelector(".t-next")
       ?.addEventListener("click", () => shift(1));
-    window.matchMedia("(max-width: 960px)").addEventListener?.("change", render);
-    window.matchMedia("(max-width: 640px)").addEventListener?.("change", render);
+    window.matchMedia("(max-width: 960px)").addEventListener?.("change", () => {
+      measuredAtWidth = 0; equalizeHeights(); render();
+    });
+    window.matchMedia("(max-width: 640px)").addEventListener?.("change", () => {
+      measuredAtWidth = 0; equalizeHeights(); render();
+    });
+    window.addEventListener("resize", () => {
+      if (storiesTrack.clientWidth !== measuredAtWidth) {
+        equalizeHeights(); reorder();
+      }
+    });
+    if (document.fonts && document.fonts.ready) {
+      document.fonts.ready.then(() => { measuredAtWidth = 0; equalizeHeights(); });
+    }
 
+    equalizeHeights();
     render();
   }
 })();
