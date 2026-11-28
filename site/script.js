@@ -149,14 +149,23 @@
     }
 
     let start = 0;
+    let animating = false;
+
     function visibleCount() {
       if (window.matchMedia("(max-width: 640px)").matches) return 1;
       if (window.matchMedia("(max-width: 960px)").matches) return 2;
       return 3;
     }
 
-    function render() {
-      /* rotate DOM so the visible window starts at `start` */
+    function stepSize() {
+      const first = cards[0];
+      const m = parseFloat(getComputedStyle(first).marginRight) || 0;
+      return first.offsetWidth + m;
+    }
+
+    /* rotate the DOM so the visible window starts at `start`;
+       cards beyond the window are hidden */
+    function reorder() {
       const frag = document.createDocumentFragment();
       const n = visibleCount();
       for (let k = 0; k < cards.length; k++) {
@@ -167,11 +176,51 @@
       storiesTrack.appendChild(frag);
     }
 
+    /* next: row slides left (in from the right); prev: it slides right
+       (in from the left) — opposing sides, one card per click */
     function shift(dir) {
-      storiesTrack.classList.add("t-fade");
-      start = (start + dir + cards.length) % cards.length;
-      render();
-      setTimeout(() => storiesTrack.classList.remove("t-fade"), 200);
+      if (animating) return;
+      animating = true;
+      cards.forEach(c => c.classList.remove("is-hidden")); /* all in flow for the motion */
+      const step = stepSize();
+
+      if (reduced) {
+        start = (start + dir + cards.length) % cards.length;
+        reorder();
+        animating = false;
+        return;
+      }
+
+      if (dir > 0) {
+        /* next: current DOM already has the entering card off the right edge */
+        storiesTrack.style.transition =
+          "transform .32s cubic-bezier(.25,.8,.35,1)";
+        storiesTrack.style.transform = `translateX(-${step}px)`;
+        setTimeout(() => {
+          start = (start + 1) % cards.length;
+          storiesTrack.style.transition = "none";
+          storiesTrack.style.transform = "none";
+          reorder();
+          void storiesTrack.offsetWidth;
+          storiesTrack.style.transition = "";
+          animating = false;
+        }, 330);
+      } else {
+        /* prev: place the entering card off the LEFT edge without painting,
+           then slide the row right */
+        storiesTrack.style.transition = "none";
+        storiesTrack.style.transform = `translateX(-${step}px)`;
+        void storiesTrack.offsetWidth; /* reflow: jump lands unpainted */
+        start = (start - 1 + cards.length) % cards.length;
+        reorder();
+        storiesTrack.style.transition =
+          "transform .32s cubic-bezier(.25,.8,.35,1)";
+        storiesTrack.style.transform = "translateX(0)";
+        setTimeout(() => {
+          storiesTrack.style.transition = "";
+          animating = false;
+        }, 330);
+      }
     }
 
     storiesTrack.parentElement.querySelector(".t-prev")
