@@ -137,119 +137,94 @@
     });
   }
 
-  /* ── 4. testimonial carousel ─────────────────────── */
+  /* ── 4. testimonial carousel — continuous slide ── */
   const storiesTrack = document.getElementById("storiesTrack");
   if (storiesTrack) {
     const cards = Array.from(storiesTrack.children);
+    /* every card owns a virtual slot; its x position = (slot - offset) * step.
+       Cards teleport around the ends of the virtual strip only while they
+       are fully outside the viewport, so movement is always one direction. */
+    const pos = new Map();
+    cards.forEach((c, i) => {
+      pos.set(c, i + Math.floor(Math.random() * 50) * cards.length);
+    });
 
-    /* shuffle card order on every page load */
-    for (let i = cards.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [cards[i], cards[j]] = [cards[j], cards[i]];
-    }
-
-    let start = 0;
-    let animating = false;
+    let offset = 0;             /* continuous position, card units */
+    let slotW = 0, stepPx = 0;  /* card width / card width + gap */
+    let vis = 3;                /* visible cards at the current width */
+    let gap = 32;               /* 2rem */
     let measuredAtWidth = 0;
+    let animating = false;
 
-    /* Pin the track's height to the tallest card so cycling never
-       changes the container height. Measured with every card unhidden
-       and align-items lifted, then cards revert to stretch (equal). */
-    function equalizeHeights() {
-      const w = storiesTrack.clientWidth;
-      if (w === measuredAtWidth) return;
-      measuredAtWidth = w;
-      const hidden = [];
-      cards.forEach(c => {
-        if (c.classList.contains("is-hidden")) { hidden.push(c); c.classList.remove("is-hidden"); }
-      });
-      storiesTrack.style.alignItems = "flex-start";
-      let max = 0;
-      cards.forEach(c => { max = Math.max(max, c.offsetHeight); });
-      storiesTrack.style.alignItems = "";
-      hidden.forEach(c => c.classList.add("is-hidden"));
-      if (max > 0) {
-        const cs = getComputedStyle(storiesTrack);
-        const pad = parseFloat(cs.paddingTop) + parseFloat(cs.paddingBottom);
-        storiesTrack.style.height = (max + pad) + "px";
-      }
-    }
     function visibleCount() {
       if (window.matchMedia("(max-width: 640px)").matches) return 1;
       if (window.matchMedia("(max-width: 960px)").matches) return 2;
       return 3;
     }
 
-    /* fractional-exact so the slide never snaps on settle */
-    function stepSize() {
-      const first = cards[0];
-      const m = parseFloat(getComputedStyle(first).marginRight) || 0;
-      return first.getBoundingClientRect().width + m;
+    function layout() {
+      const w = storiesTrack.clientWidth;
+      if (w === measuredAtWidth && slotW) { applyPositions(); return; }
+      measuredAtWidth = w;
+      vis = visibleCount();
+      gap = parseFloat(getComputedStyle(document.documentElement).fontSize) * 2;
+      slotW = (w - (vis - 1) * gap) / vis;
+      stepPx = slotW + gap;
+      /* natural heights, then fix a uniform height across the deck */
+      cards.forEach(c => { c.style.width = slotW + "px"; c.style.height = "auto"; });
+      let max = 0;
+      cards.forEach(c => { max = Math.max(max, c.offsetHeight); });
+      cards.forEach(c => { c.style.height = max + "px"; });
+      const cs = getComputedStyle(storiesTrack);
+      storiesTrack.style.height =
+        (max + parseFloat(cs.paddingTop) + parseFloat(cs.paddingBottom)) + "px";
+      applyPositions();
     }
 
-    /* rotate the DOM so the visible window starts at `start`;
-       `hide` also removes the cards that fall outside the window */
-    function reorder(hide) {
-      const frag = document.createDocumentFragment();
-      const n = visibleCount();
-      for (let k = 0; k < cards.length; k++) {
-        const card = cards[(start + k) % cards.length];
-        if (hide) card.classList.toggle("is-hidden", k >= n);
-        frag.appendChild(card);
-      }
-      storiesTrack.appendChild(frag);
+    /* wrap virtual slots back around to just outside the current window;
+       only ever happens to cards that are fully off-screen */
+    function normalize() {
+      cards.forEach(c => {
+        let p = pos.get(c);
+        while (p < offset - 1) p += cards.length;
+        while (p > offset + vis) p -= cards.length;
+        pos.set(c, p);
+      });
+      applyPositions();
     }
 
-    /* next: row slides left (exits left, enters right); prev: the mirror */
+    function applyPositions() {
+      cards.forEach(c => {
+        const x = (pos.get(c) - offset) * stepPx;
+        c.style.transform = "translateX(" + x + "px)";
+      });
+    }
+
     function shift(dir) {
       if (animating) return;
       animating = true;
       storiesTrack.classList.add("is-animating");
-      const step = stepSize();
+      const from = offset, to = offset + dir;
 
-      const finish = () => {
-        start = (start + dir + cards.length) % cards.length;
-        reorder(true);                    /* settle: hide out-of-window cards */
-        storiesTrack.style.transition = "";
-        storiesTrack.style.transform = "";
+      const done = () => {
+        offset = to;
+        normalize();
         storiesTrack.classList.remove("is-animating");
         animating = false;
       };
-      const onEnd = (e) => {
-        if (e && e.propertyName && e.propertyName !== "transform") return;
-        storiesTrack.removeEventListener("transitionend", onEnd);
-        clearTimeout(safety);
-        finish();
-      };
 
-      /* everyone in flow: so the exiting card slides ALL the way out
-         instead of display:none-vanishing at the start */
-      cards.forEach(c => c.classList.remove("is-hidden"));
+      if (reduced) { done(); return; }
 
-      if (reduced) { finish(); return; }
-
-      if (dir > 0) {
-        /* next: the entering card already sits just off the right edge */
-        storiesTrack.style.transition =
-          "transform .42s cubic-bezier(.3,0,.22,1)";
-        storiesTrack.style.transform = `translateX(-${step}px)`;
-        storiesTrack.addEventListener("transitionend", onEnd);
-      } else {
-        /* prev: park the entering card just off the LEFT edge (unpainted
-           jump), then slide the row right */
-        storiesTrack.style.transition = "none";
-        storiesTrack.style.transform = `translateX(-${step}px)`;
-        void storiesTrack.offsetWidth; /* commit the jump unpainted */
-        start = (start - 1 + cards.length) % cards.length;
-        reorder(false);
-        storiesTrack.style.transition =
-          "transform .42s cubic-bezier(.3,0,.22,1)";
-        storiesTrack.style.transform = "translateX(0)";
-        storiesTrack.addEventListener("transitionend", onEnd);
-      }
-      /* safety net if the browser eats the transitionend event */
-      clearTimeout(safety);
-      var safety = setTimeout(onEnd, 600);
+      /* rAF-driven slide: one continuous motion, ease-out cubic */
+      const dur = 480, t0 = performance.now();
+      const ease = t => 1 - Math.pow(1 - t, 3);
+      (function frame(now) {
+        const t = Math.min(1, (now - t0) / dur);
+        offset = from + (to - from) * ease(t);
+        applyPositions();
+        if (t < 1) requestAnimationFrame(frame);
+        else done();
+      })(t0);
     }
 
     storiesTrack.parentElement.querySelector(".t-prev")
@@ -257,21 +232,18 @@
     storiesTrack.parentElement.querySelector(".t-next")
       ?.addEventListener("click", () => shift(1));
     window.matchMedia("(max-width: 960px)").addEventListener?.("change", () => {
-      measuredAtWidth = 0; equalizeHeights(); reorder(true);
+      measuredAtWidth = 0; layout(); normalize();
     });
     window.matchMedia("(max-width: 640px)").addEventListener?.("change", () => {
-      measuredAtWidth = 0; equalizeHeights(); reorder(true);
+      measuredAtWidth = 0; layout(); normalize();
     });
     window.addEventListener("resize", () => {
-      if (storiesTrack.clientWidth !== measuredAtWidth) {
-        equalizeHeights(); reorder(true);
-      }
+      if (storiesTrack.clientWidth !== measuredAtWidth) { layout(); normalize(); }
     });
     if (document.fonts && document.fonts.ready) {
-      document.fonts.ready.then(() => { measuredAtWidth = 0; equalizeHeights(); });
+      document.fonts.ready.then(() => { measuredAtWidth = 0; layout(); normalize(); });
     }
 
-    equalizeHeights();
-    reorder(true);
+    layout();
   }
 })();

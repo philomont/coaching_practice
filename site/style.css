@@ -223,42 +223,39 @@ a { color: inherit; text-decoration: none; }
 .centered { text-align: center; margin-top: 2.6rem; }
 
 /* ── client stories ── */
-/* client stories · carousel (3 visible on desktop, JS cycles) */
+/* client stories · carousel — cards are absolutely positioned and driven
+   entirely by JS: a continuous offset slides them; an edge mask fades
+   them out/in as they cross the margins (the "void") */
 .stories-wrap { position: relative; max-width: 1080px; margin: 0 auto; }
 .stories {
-  display: flex; overflow: hidden; align-items: stretch;
-  /* deep padding so hover-lift shadows never clip;
-     negative margins keep the section's visual footprint identical */
+  position: relative; overflow: hidden;
+  /* deep padding so hover shadows and the mask fade never clip */
   padding: 28px 0 38px;
   margin: -28px 0 -38px;
-  transition: transform .42s cubic-bezier(.3,0,.22,1);  /* pure decel: no overshoot */
 }
-/* the void: while sliding, cards fade out/in as they cross the edges */
 .stories.is-animating {
   -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 48px, #000 calc(100% - 48px), transparent 100%);
   mask-image: linear-gradient(90deg, transparent 0, #000 48px, #000 calc(100% - 48px), transparent 100%);
 }
 .story {
-  flex: 0 0 calc((100% - 4rem) / 3);
-  margin-right: 2rem;
+  position: absolute; top: 0; left: 0;
   background: var(--card); border-radius: 18px;
   padding: 1.9rem 1.8rem;
-  transition: transform .25s ease, box-shadow .25s ease;
+  transition: box-shadow .25s ease;
+  will-change: transform;
 }
-.story:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 20px 48px rgba(32,29,26,.13);
+.story:hover { box-shadow: 0 20px 48px rgba(32,29,26,.13); }
+.t-controls { display: flex; justify-content: center; gap: 1rem; margin-top: 1.8rem; }
+.t-prev, .t-next {
+  width: 46px; height: 46px; border-radius: 999px;
+  border: 1px solid rgba(32,29,26,.3); background: none;
+  cursor: pointer; font-size: 1.35rem; line-height: 1;
+  color: var(--ink); display: flex; align-items: center; justify-content: center;
 }
-.story.is-hidden { display: none; }
-
-/* card width tracks the carousel's visible count: 3 desktop / 2 tablet / 1 mobile */
-@media (max-width: 960px) and (min-width: 641px) {
-  .story { flex: 0 0 calc((100% - 2rem) / 2); margin-right: 2rem; }
-  .story:nth-child(even) { margin-right: 0; }
-}
-@media (max-width: 640px) {
-  .story { flex: 0 0 100%; margin-right: 0; }
-}
+.t-prev:hover, .t-next:hover { background: var(--ink); border-color: var(--ink); color: var(--cream); }
+.story blockquote { font-size: 1.04rem; font-style: italic; }
+.story figcaption { margin-top: 1.1rem; font-size: .85rem; color: var(--ink); }
+.story figcaption span { color: var(--ink-soft); }
 .t-controls { display: flex; justify-content: center; gap: 1rem; margin-top: 1.8rem; }
 .t-prev, .t-next {
   width: 46px; height: 46px; border-radius: 999px;
