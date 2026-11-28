@@ -180,70 +180,74 @@
       return 3;
     }
 
+    /* fractional-exact so the slide never snaps on settle */
     function stepSize() {
       const first = cards[0];
       const m = parseFloat(getComputedStyle(first).marginRight) || 0;
-      return first.offsetWidth + m;
+      return first.getBoundingClientRect().width + m;
     }
 
     /* rotate the DOM so the visible window starts at `start`;
-       cards beyond the window are hidden */
-    function reorder() {
+       `hide` also removes the cards that fall outside the window */
+    function reorder(hide) {
       const frag = document.createDocumentFragment();
       const n = visibleCount();
       for (let k = 0; k < cards.length; k++) {
         const card = cards[(start + k) % cards.length];
-        card.classList.toggle("is-hidden", k >= n);
+        if (hide) card.classList.toggle("is-hidden", k >= n);
         frag.appendChild(card);
       }
       storiesTrack.appendChild(frag);
     }
 
-    /* next: row slides left (in from the right); prev: it slides right
-       (in from the left) — opposing sides, one card per click */
+    /* next: row slides left (exits left, enters right); prev: the mirror */
     function shift(dir) {
       if (animating) return;
       animating = true;
-      cards.forEach(c => c.classList.remove("is-hidden")); /* all in flow for the motion */
       const step = stepSize();
 
-      if (reduced) {
+      const finish = () => {
         start = (start + dir + cards.length) % cards.length;
-        reorder();
+        reorder(true);                    /* settle: hide out-of-window cards */
+        storiesTrack.style.transition = "";
+        storiesTrack.style.transform = "";
         animating = false;
-        return;
-      }
+      };
+      const onEnd = (e) => {
+        if (e && e.propertyName && e.propertyName !== "transform") return;
+        storiesTrack.removeEventListener("transitionend", onEnd);
+        clearTimeout(safety);
+        finish();
+      };
+
+      /* everyone in flow: so the exiting card slides ALL the way out
+         instead of display:none-vanishing at the start */
+      cards.forEach(c => c.classList.remove("is-hidden"));
+
+      if (reduced) { finish(); return; }
 
       if (dir > 0) {
-        /* next: current DOM already has the entering card off the right edge */
+        /* next: the entering card already sits just off the right edge */
         storiesTrack.style.transition =
-          "transform .32s cubic-bezier(.25,.8,.35,1)";
+          "transform .34s cubic-bezier(.22,.61,.36,1)";
         storiesTrack.style.transform = `translateX(-${step}px)`;
-        setTimeout(() => {
-          start = (start + 1) % cards.length;
-          storiesTrack.style.transition = "none";
-          storiesTrack.style.transform = "none";
-          reorder();
-          void storiesTrack.offsetWidth;
-          storiesTrack.style.transition = "";
-          animating = false;
-        }, 330);
+        storiesTrack.addEventListener("transitionend", onEnd);
       } else {
-        /* prev: place the entering card off the LEFT edge without painting,
-           then slide the row right */
+        /* prev: park the entering card just off the LEFT edge (unpainted
+           jump), then slide the row right */
         storiesTrack.style.transition = "none";
         storiesTrack.style.transform = `translateX(-${step}px)`;
-        void storiesTrack.offsetWidth; /* reflow: jump lands unpainted */
+        void storiesTrack.offsetWidth; /* commit the jump unpainted */
         start = (start - 1 + cards.length) % cards.length;
-        reorder();
+        reorder(false);
         storiesTrack.style.transition =
-          "transform .32s cubic-bezier(.25,.8,.35,1)";
+          "transform .34s cubic-bezier(.22,.61,.36,1)";
         storiesTrack.style.transform = "translateX(0)";
-        setTimeout(() => {
-          storiesTrack.style.transition = "";
-          animating = false;
-        }, 330);
+        storiesTrack.addEventListener("transitionend", onEnd);
       }
+      /* safety net if the browser eats the transitionend event */
+      clearTimeout(safety);
+      var safety = setTimeout(onEnd, 600);
     }
 
     storiesTrack.parentElement.querySelector(".t-prev")
@@ -251,14 +255,14 @@
     storiesTrack.parentElement.querySelector(".t-next")
       ?.addEventListener("click", () => shift(1));
     window.matchMedia("(max-width: 960px)").addEventListener?.("change", () => {
-      measuredAtWidth = 0; equalizeHeights(); render();
+      measuredAtWidth = 0; equalizeHeights(); reorder(true);
     });
     window.matchMedia("(max-width: 640px)").addEventListener?.("change", () => {
-      measuredAtWidth = 0; equalizeHeights(); render();
+      measuredAtWidth = 0; equalizeHeights(); reorder(true);
     });
     window.addEventListener("resize", () => {
       if (storiesTrack.clientWidth !== measuredAtWidth) {
-        equalizeHeights(); reorder();
+        equalizeHeights(); reorder(true);
       }
     });
     if (document.fonts && document.fonts.ready) {
@@ -266,6 +270,6 @@
     }
 
     equalizeHeights();
-    render();
+    reorder(true);
   }
 })();
