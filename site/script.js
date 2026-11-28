@@ -204,6 +204,7 @@
     function shift(dir) {
       if (animating) return;
       animating = true;
+      storiesTrack.classList.add("is-animating");
       const step = stepSize();
 
       const finish = () => {
@@ -211,6 +212,7 @@
         reorder(true);                    /* settle: hide out-of-window cards */
         storiesTrack.style.transition = "";
         storiesTrack.style.transform = "";
+        storiesTrack.classList.remove("is-animating");
         animating = false;
       };
       const onEnd = (e) => {
@@ -229,7 +231,7 @@
       if (dir > 0) {
         /* next: the entering card already sits just off the right edge */
         storiesTrack.style.transition =
-          "transform .34s cubic-bezier(.22,.61,.36,1)";
+          "transform .42s cubic-bezier(.3,0,.22,1)";
         storiesTrack.style.transform = `translateX(-${step}px)`;
         storiesTrack.addEventListener("transitionend", onEnd);
       } else {
@@ -241,7 +243,7 @@
         start = (start - 1 + cards.length) % cards.length;
         reorder(false);
         storiesTrack.style.transition =
-          "transform .34s cubic-bezier(.22,.61,.36,1)";
+          "transform .42s cubic-bezier(.3,0,.22,1)";
         storiesTrack.style.transform = "translateX(0)";
         storiesTrack.addEventListener("transitionend", onEnd);
       }
