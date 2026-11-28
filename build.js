@@ -217,16 +217,14 @@ function entriesHtml(posts, root, startDelayAt = 0) {
 }
 
 function storiesHtml() {
-  const delays = ["", " delay-1", " delay-2", " delay-3"];
-  return collect(path.join(CONTENT, "testimonials")).map((it, i) => {
-    const d = delays[i % delays.length];
+  return collect(path.join(CONTENT, "testimonials")).map((it) => {
     const excerpt = it.fm.excerpt || fallbackExcerpt(it.body);
     const full = md(it.body);
     const open = full
       ? `<button class="story-more" type="button" data-name="${esc(it.fm.name || "")}">Read the full note &rarr;</button>`
       : "";
     const tpl = full ? `<template class="t-full">${full}</template>` : "";
-    return `<figure class="story reveal${d}">
+    return `<figure class="story">
       <blockquote>&ldquo;${esc(excerpt)}&rdquo;</blockquote>
       <figcaption>&mdash; ${esc(it.fm.name || "")}</figcaption>
       ${open}

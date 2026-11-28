@@ -136,4 +136,51 @@
       if (e.key === "Escape" && modal.classList.contains("open")) close();
     });
   }
+
+  /* ── 4. testimonial carousel ─────────────────────── */
+  const storiesTrack = document.getElementById("storiesTrack");
+  if (storiesTrack) {
+    const cards = Array.from(storiesTrack.children);
+
+    /* shuffle card order on every page load */
+    for (let i = cards.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [cards[i], cards[j]] = [cards[j], cards[i]];
+    }
+
+    let start = 0;
+    function visibleCount() {
+      if (window.matchMedia("(max-width: 640px)").matches) return 1;
+      if (window.matchMedia("(max-width: 960px)").matches) return 2;
+      return 3;
+    }
+
+    function render() {
+      /* rotate DOM so the visible window starts at `start` */
+      const frag = document.createDocumentFragment();
+      const n = visibleCount();
+      for (let k = 0; k < cards.length; k++) {
+        const card = cards[(start + k) % cards.length];
+        card.classList.toggle("is-hidden", k >= n);
+        frag.appendChild(card);
+      }
+      storiesTrack.appendChild(frag);
+    }
+
+    function shift(dir) {
+      storiesTrack.classList.add("t-fade");
+      start = (start + dir + cards.length) % cards.length;
+      render();
+      setTimeout(() => storiesTrack.classList.remove("t-fade"), 200);
+    }
+
+    storiesTrack.parentElement.querySelector(".t-prev")
+      ?.addEventListener("click", () => shift(-1));
+    storiesTrack.parentElement.querySelector(".t-next")
+      ?.addEventListener("click", () => shift(1));
+    window.matchMedia("(max-width: 960px)").addEventListener?.("change", render);
+    window.matchMedia("(max-width: 640px)").addEventListener?.("change", render);
+
+    render();
+  }
 })();
