@@ -137,24 +137,35 @@
     });
   }
 
-  /* ── 4. testimonial carousel — continuous slide ── */
+  /* ── 4. testimonial carousel — virtual-strip slide ──
+     Cards keep fixed virtual slots on an endless strip; a single offset
+     slides the strip one card per click. The entering/exiting cards are
+     the two parked flush with the clip edges, so every slide moves the
+     whole strip exactly one step: one card leaves, one arrives, same
+     speed, same easing, no reordering, no snapping — ever. */
   const storiesTrack = document.getElementById("storiesTrack");
   if (storiesTrack) {
     const cards = Array.from(storiesTrack.children);
-    /* every card owns a virtual slot; its x position = (slot - offset) * step.
-       Cards teleport around the ends of the virtual strip only while they
-       are fully outside the viewport, so movement is always one direction. */
-    const pos = new Map();
-    cards.forEach((c, i) => {
-      pos.set(c, i + Math.floor(Math.random() * 50) * cards.length);
-    });
-
-    let offset = 0;             /* continuous position, card units */
+    const pos = new Map();      /* card -> virtual slot (integers) */
+    let offset = 0;             /* integer at rest, eased during a slide */
     let slotW = 0, stepPx = 0;  /* card width / card width + gap */
-    let vis = 3;                /* visible cards at the current width */
-    let gap = 32;               /* 2rem */
+    let vis = 3, padX = 0;      /* visible count / side inset (= gap) */
     let measuredAtWidth = 0;
     let animating = false;
+
+    /* shuffle: window takes three random cards; the other two park
+       flush-left and flush-right, fully outside the clip */
+    (function shuffle() {
+      const idx = cards.map((_, i) => i);
+      for (let i = idx.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [idx[i], idx[j]] = [idx[j], idx[i]];
+      }
+      idx.forEach((ci, slot) => {
+        const p = slot < 3 ? slot : (slot === 3 ? 3 : -1);
+        pos.set(cards[ci], p);   /* 0,1,2 visible · 3 flush-right · -1 flush-left */
+      });
+    })();
 
     function visibleCount() {
       if (window.matchMedia("(max-width: 640px)").matches) return 1;
@@ -167,10 +178,9 @@
       if (w === measuredAtWidth && slotW) { applyPositions(); return; }
       measuredAtWidth = w;
       vis = visibleCount();
-      gap = parseFloat(getComputedStyle(document.documentElement).fontSize) * 2;
-      slotW = (w - (vis - 1) * gap) / vis;
-      stepPx = slotW + gap;
-      /* natural heights, then fix a uniform height across the deck */
+      padX = parseFloat(getComputedStyle(document.documentElement).fontSize) * 2;
+      slotW = (w - 2 * padX - (vis - 1) * padX) / vis;
+      stepPx = slotW + padX;
       cards.forEach(c => { c.style.width = slotW + "px"; c.style.height = "auto"; });
       let max = 0;
       cards.forEach(c => { max = Math.max(max, c.offsetHeight); });
@@ -181,8 +191,15 @@
       applyPositions();
     }
 
-    /* wrap virtual slots back around to just outside the current window;
-       only ever happens to cards that are fully off-screen */
+    function applyPositions() {
+      cards.forEach(c => {
+        const x = padX + (pos.get(c) - offset) * stepPx;
+        c.style.transform = "translateX(" + x + "px)";
+      });
+    }
+
+    /* wrap virtual slots back to the opposite edge: both the old and new
+       parking spots are fully outside the clip, so this is never visible */
     function normalize() {
       cards.forEach(c => {
         let p = pos.get(c);
@@ -190,33 +207,18 @@
         while (p > offset + vis) p -= cards.length;
         pos.set(c, p);
       });
-      applyPositions();
-    }
-
-    function applyPositions() {
-      cards.forEach(c => {
-        const x = (pos.get(c) - offset) * stepPx;
-        c.style.transform = "translateX(" + x + "px)";
-      });
     }
 
     function shift(dir) {
       if (animating) return;
       animating = true;
-      storiesTrack.classList.add("is-animating");
-      const from = offset, to = offset + dir;
+      const from = offset, to = from + dir;
 
-      const done = () => {
-        offset = to;
-        normalize();
-        storiesTrack.classList.remove("is-animating");
-        animating = false;
-      };
+      const done = () => { offset = to; normalize(); animating = false; };
 
-      if (reduced) { done(); return; }
+      if (reduced) { done(); applyPositions(); return; }
 
-      /* rAF-driven slide: one continuous motion, ease-out cubic */
-      const dur = 480, t0 = performance.now();
+      const dur = 450, t0 = performance.now();
       const ease = t => 1 - Math.pow(1 - t, 3);
       (function frame(now) {
         const t = Math.min(1, (now - t0) / dur);
@@ -231,17 +233,13 @@
       ?.addEventListener("click", () => shift(-1));
     storiesTrack.parentElement.querySelector(".t-next")
       ?.addEventListener("click", () => shift(1));
-    window.matchMedia("(max-width: 960px)").addEventListener?.("change", () => {
-      measuredAtWidth = 0; layout(); normalize();
-    });
-    window.matchMedia("(max-width: 640px)").addEventListener?.("change", () => {
-      measuredAtWidth = 0; layout(); normalize();
-    });
+    window.matchMedia("(max-width: 960px)").addEventListener?.("change", () => { layout(); normalize(); });
+    window.matchMedia("(max-width: 640px)").addEventListener?.("change", () => { layout(); normalize(); });
     window.addEventListener("resize", () => {
       if (storiesTrack.clientWidth !== measuredAtWidth) { layout(); normalize(); }
     });
     if (document.fonts && document.fonts.ready) {
-      document.fonts.ready.then(() => { measuredAtWidth = 0; layout(); normalize(); });
+      document.fonts.ready.then(() => { layout(); normalize(); });
     }
 
     layout();
