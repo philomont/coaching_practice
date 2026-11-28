@@ -123,8 +123,14 @@
     <h2>{{STORIES_TITLE}}</h2>
     <p class="station-sub">{{STORIES_SUB}}</p>
   </div>
-  <div class="stories">
-    {{STORIES_HTML}}
+  <div class="stories-wrap reveal">
+    <div class="stories" id="storiesTrack">
+      {{STORIES_HTML}}
+    </div>
+    <div class="t-controls">
+      <button class="t-prev" type="button" aria-label="Previous testimonials">&lsaquo;</button>
+      <button class="t-next" type="button" aria-label="Next testimonials">&rsaquo;</button>
+    </div>
   </div>
 </section>
 
